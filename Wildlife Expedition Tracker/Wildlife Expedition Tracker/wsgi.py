@@ -1,5 +1,5 @@
 """
-WSGI config for Softuni_project project.
+WSGI config for Wildlife Expedition Tracker project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Softuni_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Wildlife Expedition Tracker.settings')
 
 application = get_wsgi_application()
