@@ -1,5 +1,5 @@
 """
-ASGI config for Wildlife Expedition Tracker project.
+ASGI config for Wildlife_Expedition_Tracker project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Wildlife Expedition Tracker.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Wildlife_Expedition_Tracker.settings')
 
 application = get_asgi_application()

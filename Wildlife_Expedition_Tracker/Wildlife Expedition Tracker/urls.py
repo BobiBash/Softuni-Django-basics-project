@@ -1,5 +1,5 @@
 """
-URL configuration for Wildlife Expedition Tracker project.
+URL configuration for Wildlife_Expedition_Tracker project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
@@ -15,8 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("home/", include("common.urls")),
+    path("analytics/", include("analytics.urls")),
+    path("expeditions/", include("expeditions.urls")),
+    path("expeditions-library/", include("expeditions_library.urls")),
+    path("gallery/", include("media_gallery.urls")),
 ]
