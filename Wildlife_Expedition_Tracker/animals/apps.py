@@ -1,0 +1,73 @@
+from django.apps import AppConfig
+
+
+class AnimalsConfig(AppConfig):
+    name = 'animals'
+
+    # def ready(self):
+    #     from .models import Animals
+    #
+    #     #animal data was created with AI
+    #     if not Animals.objects.exists():
+    #         Animals.objects.bulk_create([
+    #             Animals(name="Cheetah", kingdom="Animalia", group="Mammal", food="Gazelle",
+    #                    most_distinctive_feature="Yellowish fur with black spots", weight="40-65kg"),
+    #             Animals(name="Lion", kingdom="Animalia", group="Mammal", food="Zebra, Wildebeest",
+    #                    most_distinctive_feature="Golden fur with mane", weight="150-250kg"),
+    #             Animals(name="Elephant", kingdom="Animalia", group="Mammal", food="Plants",
+    #                    most_distinctive_feature="Long trunk and tusks", weight="2000-6000kg"),
+    #             Animals(name="Penguin", kingdom="Animalia", group="Bird", food="Fish",
+    #                    most_distinctive_feature="Black and white feathers, flightless", weight="15-35kg"),
+    #             Animals(name="Giraffe", kingdom="Animalia", group="Mammal", food="Leaves",
+    #                    most_distinctive_feature="Long neck", weight="800-1200kg"),
+    #             Animals(name="Tiger", kingdom="Animalia", group="Mammal", food="Deer, Wild Boar",
+    #                    most_distinctive_feature="Orange fur with black stripes", weight="90-310kg"),
+    #             Animals(name="Wolf", kingdom="Animalia", group="Mammal", food="Deer, Rabbits",
+    #                    most_distinctive_feature="Pack behavior", weight="30-80kg"),
+    #             Animals(name="Kangaroo", kingdom="Animalia", group="Mammal", food="Plants",
+    #                    most_distinctive_feature="Powerful hind legs", weight="18-90kg"),
+    #             Animals(name="Polar Bear", kingdom="Animalia", group="Mammal", food="Seals",
+    #                    most_distinctive_feature="Thick white fur", weight="350-700kg"),
+    #             Animals(name="Hippopotamus", kingdom="Animalia", group="Mammal", food="Plants",
+    #                    most_distinctive_feature="Large barrel-shaped body", weight="1500-3000kg"),
+    #             Animals(name="Zebra", kingdom="Animalia", group="Mammal", food="Grass",
+    #                    most_distinctive_feature="Black and white stripes", weight="220-450kg"),
+    #             Animals(name="Rhinoceros", kingdom="Animalia", group="Mammal", food="Plants",
+    #                    most_distinctive_feature="Horn on nose", weight="800-2300kg"),
+    #             Animals(name="Orangutan", kingdom="Animalia", group="Mammal", food="Fruits",
+    #                    most_distinctive_feature="Long arms, reddish fur", weight="30-90kg"),
+    #             Animals(name="Chimpanzee", kingdom="Animalia", group="Mammal", food="Fruits, insects",
+    #                    most_distinctive_feature="Highly intelligent, social", weight="40-60kg"),
+    #             Animals(name="Gorilla", kingdom="Animalia", group="Mammal", food="Plants",
+    #                    most_distinctive_feature="Large, muscular body", weight="140-200kg"),
+    #             Animals(name="Fox", kingdom="Animalia", group="Mammal", food="Rabbits, rodents",
+    #                    most_distinctive_feature="Bushy tail, cunning", weight="5-14kg"),
+    #             Animals(name="Eagle", kingdom="Animalia", group="Bird", food="Fish, small mammals",
+    #                    most_distinctive_feature="Sharp beak and talons", weight="3-6kg"),
+    #             Animals(name="Ostrich", kingdom="Animalia", group="Bird", food="Plants, insects",
+    #                    most_distinctive_feature="Largest bird, flightless", weight="90-150kg"),
+    #             Animals(name="Alligator", kingdom="Animalia", group="Reptile", food="Fish, mammals",
+    #                    most_distinctive_feature="Armored body and powerful jaws", weight="200-450kg"),
+    #             Animals(name="Crocodile", kingdom="Animalia", group="Reptile", food="Fish, mammals",
+    #                    most_distinctive_feature="Long snout and tail", weight="400-1000kg"),
+    #             Animals(name="Turtle", kingdom="Animalia", group="Reptile", food="Plants, insects",
+    #                    most_distinctive_feature="Hard protective shell", weight="100-300kg"),
+    #             Animals(name="Salmon", kingdom="Animalia", group="Fish", food="Insects",
+    #                    most_distinctive_feature="Migratory fish", weight="2-5kg"),
+    #             Animals(name="Shark", kingdom="Animalia", group="Fish", food="Fish, seals",
+    #                    most_distinctive_feature="Sharp teeth, strong swimmer", weight="100-1000kg"),
+    #             Animals(name="Dolphin", kingdom="Animalia", group="Mammal", food="Fish",
+    #                    most_distinctive_feature="Intelligent, social", weight="150-300kg"),
+    #             Animals(name="Whale", kingdom="Animalia", group="Mammal", food="Krill, fish",
+    #                    most_distinctive_feature="Massive size", weight="30,000-180,000kg"),
+    #             Animals(name="Parrot", kingdom="Animalia", group="Bird", food="Seeds, fruits",
+    #                    most_distinctive_feature="Colorful feathers, mimics sounds", weight="0.1-1kg"),
+    #             Animals(name="Flamingo", kingdom="Animalia", group="Bird", food="Algae, small crustaceans",
+    #                    most_distinctive_feature="Pink feathers, long legs", weight="2-4kg"),
+    #             Animals(name="Peacock", kingdom="Animalia", group="Bird", food="Insects, plants",
+    #                    most_distinctive_feature="Iridescent tail feathers", weight="4-6kg"),
+    #             Animals(name="Bat", kingdom="Animalia", group="Mammal", food="Insects",
+    #                    most_distinctive_feature="Can fly, echolocation", weight="0.02-1.5kg"),
+    #             Animals(name="Hawk", kingdom="Animalia", group="Bird", food="Small mammals, birds",
+    #                    most_distinctive_feature="Excellent vision, sharp talons", weight="0.5-2kg"),
+    #         ])

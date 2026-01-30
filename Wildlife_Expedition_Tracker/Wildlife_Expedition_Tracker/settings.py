@@ -33,7 +33,10 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-PROJECT_APPS = ["analytics_dashboard", "expeditions", "expeditions_library", "media_gallery"]
+PROJECT_APPS = ["analytics_dashboard", "animals",
+                "locations", "common",
+                "expeditions", "expeditions_library",
+                "media_gallery"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,7 +83,7 @@ WSGI_APPLICATION = 'Wildlife_Expedition_Tracker.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "Wildlife_expedition_tracker_db",
+        "NAME": "wildlife_expedition_tracker_db",
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": "127.0.0.1",
@@ -124,3 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_ROOT = BASE_DIR / "media"
+
+MEDIA_URL = '/media/'
