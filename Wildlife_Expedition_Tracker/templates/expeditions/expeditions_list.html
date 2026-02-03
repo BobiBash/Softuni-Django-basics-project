@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for expedition in expeditions %}
+        <div>
+            <h2>{{ expedition.title }}</h2>
+            <p>{{ expedition.description }}</p>
+            <p>{{ expedition.location }}</p>
+            <img src="{{ expedition.animal_image.url }}" alt="{{ expedition.title }}">
+        </div>
+    {% empty %}
+        <p>No expeditions registered yet.</p>
+    {% endfor %}
+</body>
+</html>

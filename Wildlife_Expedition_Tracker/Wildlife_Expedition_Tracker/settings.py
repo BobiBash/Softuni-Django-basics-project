@@ -35,8 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 PROJECT_APPS = ["analytics_dashboard", "animals",
                 "locations", "common",
-                "expeditions", "expeditions_library",
-                "media_gallery"]
+                "expeditions", "media_gallery"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -62,7 +61,7 @@ ROOT_URLCONF = 'Wildlife_Expedition_Tracker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
