@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% for expedition in expeditions %}
-        <div>
-            <h2>{{ expedition.title }}</h2>
-            <p>{{ expedition.description }}</p>
-            <p>{{ expedition.location }}</p>
-            <img src="{{ expedition.animal_image.url }}" alt="{{ expedition.title }}">
-        </div>
-    {% empty %}
-        <p>No expeditions registered yet.</p>
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="flex flex-col gap-10">
+    <div class="flex justify-center">
+        <a class="mt-5 text-xl border rounded-sm bg-slate-300 w-44 text-center p-2" href="{% url 'add_expedition' %}">Add Expedition</a>
+    </div>
+    <div class="flex min-h- min-w-2.5 border">
+        {% for expedition in expeditions %}
+        <a>asdas</a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

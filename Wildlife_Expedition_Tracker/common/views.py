@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def home(request: HttpRequest) -> HttpResponse:
-    pass
+    return render(request, "common/home.html")
 
 def about(request: HttpRequest) -> HttpResponse:
     pass

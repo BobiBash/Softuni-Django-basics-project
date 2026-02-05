@@ -1,11 +1,15 @@
 from django.db import models
-
+from django.utils.text import slugify
 
 
 # Create your models here.
 class Expedition(models.Model):
     title = models.CharField(
         max_length=150
+    )
+    slug = models.SlugField(
+        unique=True,
+        blank=True,
     )
     primary_animal = models.ForeignKey(
         "animals.Animal",
@@ -29,3 +33,21 @@ class Expedition(models.Model):
         blank=True,
         null=True
     )
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            self.slug = self._generate_unique_slug(base_slug)
+
+        super().save(*args, **kwargs)
+
+
+    def _generate_unique_slug(self, base_slug):
+        slug = base_slug
+        counter = 1
+
+        while Expedition.objects.filter(slug=slug).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
+
+        return slug
