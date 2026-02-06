@@ -8,3 +8,6 @@ class Animal(models.Model):
     food = models.CharField(max_length=100)
     most_distinctive_feature = models.CharField(max_length=150)
     weight = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

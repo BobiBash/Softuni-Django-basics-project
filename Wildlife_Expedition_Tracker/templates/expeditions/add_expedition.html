@@ -1,1 +1,27 @@
 {% extends 'base.html' %}
+
+{% block content %}
+        <h1 class="flex justify-center align-center text-2xl mb-6">Add Expedition</h1>
+
+        <form class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
+            <div class="flex flex-col">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="flex items-center m-1">
+                    <label class="w-48 text-right">{{ field.label }}</label>
+                    {% if field.name == 'additional_animals' %}
+                        <div style="background-color: white;" class="w-60 max-h-40 overflow-y-auto border rounded p-2 m-2">
+                            {{ field }}
+                        </div>
+                    {% else %}
+                        <div class="w-60">
+                            {{ field }}
+                        </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+
+
+{% endblock %}
