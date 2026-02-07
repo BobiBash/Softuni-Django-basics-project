@@ -7,6 +7,7 @@
     </div>
     <div class="flex justify-center min-h- min-w-2.5 border">
         {% for expedition in expeditions %}
+        {{ expedition.title }}
         {% empty %}
             <h1 class="">No expeditions registered yet.</h1>
         {% endfor %}

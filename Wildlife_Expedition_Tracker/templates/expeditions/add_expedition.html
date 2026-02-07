@@ -7,10 +7,10 @@
             <div class="flex flex-col">
                 {% csrf_token %}
                 {% for field in form %}
-                <div class="flex items-center m-1">
-                    <label class="w-48 text-right">{{ field.label }}</label>
+                <div class="flex flex-col">
+                    <label class="text-left items-start justify-start relative mt-2">{{ field.label }}</label>
                     {% if field.name == 'additional_animals' %}
-                        <div style="background-color: white;" class="w-60 max-h-40 overflow-y-auto border rounded p-2 m-2">
+                        <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
                             {{ field }}
                         </div>
                     {% else %}
@@ -20,6 +20,7 @@
                     {% endif %}
                 </div>
                 {% endfor %}
+                <button class="border rounded-sm p-2 m-8 bg-slate-300 hover:bg-slate-400`" type="submit">Add Expedition</button>
             </div>
         </form>
 

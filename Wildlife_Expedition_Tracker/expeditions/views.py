@@ -13,6 +13,7 @@ def add_expedition(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             form.save()
             messages.success(request, "Expedition Added Successfully")
+            return redirect('expeditions_list')
         else:
             messages.error(request, "Please correct the error/s below.")
 
