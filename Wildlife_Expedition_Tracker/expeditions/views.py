@@ -26,8 +26,15 @@ def add_expedition(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request, "expeditions/add_expedition.html", context)
-def expedition_detail(request: HttpRequest, pk: int) -> HttpResponse:
-    ...
+
+def expedition_detail(request: HttpRequest, slug: str) -> HttpResponse:
+    expedition = get_object_or_404(Expedition, slug=slug)
+
+    context = {
+        "expedition": expedition,
+    }
+
+    return render(request, "expeditions/expedition_detail.html", context)
 
 def expeditions_list(request: HttpRequest) -> HttpResponse:
     expeditions = Expedition.objects.all()
@@ -53,4 +60,8 @@ def edit_expedition(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "expeditions/edit_expedition.html", context)
 
 def delete_expedition(request: HttpRequest, pk: int) -> HttpResponse:
-    pass
+    expedition = get_object_or_404(Expedition, pk=pk)
+    if request.method == "POST":
+        expedition.delete()
+
+    return redirect('expeditions_list')

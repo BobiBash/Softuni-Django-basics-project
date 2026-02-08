@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class="flex flex-col gap-10">
-    <div class="flex justify-center">
-        <a class="mt-5 text-xl border rounded-sm bg-slate-300 w-44 text-center p-2" href="{% url 'add_expedition' %}">Add Expedition</a>
-    </div>
-    <div class="flex justify-center min-h- min-w-2.5 border">
+
+<div class="flex justify-center">
+    <a class="mt-5 text-xl border rounded-sm bg-slate-300 w-44 text-center p-2" href="{% url 'add_expedition' %}">Add Expedition</a>
+</div>
+<div class="flex justify-center m-8">
+    <div class="grid grid-cols-1 gap-4 p-2 h-[30rem] w-3xl border overflow-y-auto">
         {% for expedition in expeditions %}
-        {{ expedition.title }}
+        <a href="{% url 'expedition_detail' expedition.slug %} " class="bg-white hover:bg-gray-200">
+            <div class="flex flex-around border rounded-sm p-4">
+                {{ expedition.title }} -
+                Created on: {{ expedition.created_at|date:"d-m-Y" }}
+            </div>
+        </a>
         {% empty %}
             <h1 class="">No expeditions registered yet.</h1>
         {% endfor %}
     </div>
-</main>
+</div>
 {% endblock %}
