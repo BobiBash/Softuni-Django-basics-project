@@ -8,12 +8,21 @@
 <div class="flex justify-center m-8">
     <div class="grid grid-cols-1 gap-4 p-2 h-[30rem] w-3xl border overflow-y-auto">
         {% for expedition in expeditions %}
-        <a href="{% url 'expedition_detail' expedition.slug %} " class="bg-white hover:bg-gray-200">
-            <div class="flex flex-around border rounded-sm p-4">
-                {{ expedition.title }} -
-                Created on: {{ expedition.created_at|date:"d-m-Y" }}
+        <div class="flex justify-between border rounded-sm p-2">
+            <div>
+                <a href="{% url 'expedition_detail' expedition.slug %} " class="bg-white hover:bg-gray-200">
+                    {{ expedition.title }}
+                </a>
+                <p>Created on: {{ expedition.created_at|date:"d-m-Y" }}</p>
             </div>
-        </a>
+
+            <div class="flex gap-2 items-center">
+                <a href="{% url 'edit_expedition' expedition.pk %}"
+                class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-200 hover:bg-slate-300">Edit</a>
+                <a href="{% url 'delete_expedition' expedition.pk %}"
+                class="flex items-center justify-center border rounded-sm h-10 w-18 bg-slate-200 hover:bg-slate-300">Delete</a>
+            </div>
+        </div>
         {% empty %}
             <h1 class="">No expeditions registered yet.</h1>
         {% endfor %}

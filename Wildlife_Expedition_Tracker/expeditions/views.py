@@ -2,6 +2,8 @@ from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
+import asyncio
+
 from .forms import ExpeditionForm
 from .models import Expedition
 
@@ -29,9 +31,14 @@ def add_expedition(request: HttpRequest) -> HttpResponse:
 
 def expedition_detail(request: HttpRequest, slug: str) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
+    form = ExpeditionForm(instance=expedition)
+
+    for field in form.fields.values():
+        field.disabled = True
 
     context = {
         "expedition": expedition,
+        "form": form,
     }
 
     return render(request, "expeditions/expedition_detail.html", context)
@@ -63,5 +70,10 @@ def delete_expedition(request: HttpRequest, pk: int) -> HttpResponse:
     expedition = get_object_or_404(Expedition, pk=pk)
     if request.method == "POST":
         expedition.delete()
+        return redirect('expeditions_list')
 
-    return redirect('expeditions_list')
+    context = {
+        "expedition": expedition
+    }
+
+    return render(request, 'expeditions/expeditions_confirm_delete.html', context)

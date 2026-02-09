@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <h1 class="flex justify-center align-center text-2xl mb-6">Add Expedition</h1>
+        <h1 class="flex justify-center align-center text-2xl mb-6">Details for -  {{ expedition.title }}</h1>
 
-        <form class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
+        <div class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
             <div class="flex flex-col">
-                {% csrf_token %}
                 {% for field in form %}
-                <div class="flex flex-col">
+                <div class="flex flex-col justify-center items-center">
                     <label class="text-left items-start justify-start relative mt-2">{{ field.label }}</label>
                     {% if field.name == 'additional_animals' %}
                         <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
                             {{ field }}
                         </div>
+                    {% elif field.name == 'animal_image' %}
+                      {% if expedition.animal_image %}
+                        <img class="max-w-sm mb-8" src="{{ expedition.animal_image.url }}">
+                      {% else %}
+                        <p>No image available</p>
+                      {% endif %}
+
+
                     {% else %}
                         <div class="w-60">
                             {{ field }}
@@ -20,9 +27,7 @@
                     {% endif %}
                 </div>
                 {% endfor %}
-                <button class="border rounded-sm p-2 m-8 bg-slate-300 hover:bg-slate-350" type="submit">Add Expedition</button>
             </div>
-        </form>
-
+        </div>
 
 {% endblock %}
