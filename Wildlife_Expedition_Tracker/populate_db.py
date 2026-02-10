@@ -171,8 +171,7 @@ animals_data = [
     }
 ]
 
-Animal.objects.bulk_create([
-    Animal(**animal) for animal in animals_data
-])
+for animal in animals_data:
+    Animal.objects.create(**animal)
 
 print(f"Created {len(animals_data)} animals")

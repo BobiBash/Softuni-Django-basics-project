@@ -9,3 +9,12 @@ def animals_list(request: HttpRequest) -> HttpResponse:
         "animals": animals
     }
     return render(request, "animals/animals_list.html", context)
+
+def animal_detail(request: HttpRequest, slug: str) -> HttpResponse:
+    animal = Animal.objects.get(slug=slug)
+
+    context = {
+        'animal': animal
+    }
+
+    return render(request, "animals/animal_detail.html", context)

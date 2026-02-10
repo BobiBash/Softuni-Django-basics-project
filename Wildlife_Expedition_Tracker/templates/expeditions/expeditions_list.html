@@ -3,24 +3,24 @@
 {% block content %}
 
 <div class="flex justify-center">
-    <a class="mt-5 text-xl border rounded-sm bg-slate-300 w-44 text-center p-2" href="{% url 'add_expedition' %}">Add Expedition</a>
+    <a class="mt-5 text-xl border rounded-sm bg-slate-300 hover:bg-slate-400 w-44 text-center p-2" href="{% url 'add_expedition' %}">Add Expedition</a>
 </div>
 <div class="flex justify-center m-8">
-    <div class="grid grid-cols-1 gap-4 p-2 h-[30rem] w-3xl border overflow-y-auto">
+    <div class="grid grid-cols-1 gap-4 p-2 w-3xl border overflow-y-auto">
         {% for expedition in expeditions %}
-        <div class="flex justify-between border rounded-sm p-2">
+        <div class="flex justify-between border rounded-sm p-2 bg-white">
             <div>
-                <a href="{% url 'expedition_detail' expedition.slug %} " class="bg-white hover:bg-gray-200">
-                    {{ expedition.title }}
+                <a href="{% url 'expedition_detail' expedition.slug %} " class="underline hover:text-blue-800">
+                    <p class="text-xl">{{ expedition.title }}</p>
                 </a>
                 <p>Created on: {{ expedition.created_at|date:"d-m-Y" }}</p>
             </div>
 
             <div class="flex gap-2 items-center">
                 <a href="{% url 'edit_expedition' expedition.pk %}"
-                class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-200 hover:bg-slate-300">Edit</a>
+                class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
                 <a href="{% url 'delete_expedition' expedition.pk %}"
-                class="flex items-center justify-center border rounded-sm h-10 w-18 bg-slate-200 hover:bg-slate-300">Delete</a>
+                class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
             </div>
         </div>
         {% empty %}

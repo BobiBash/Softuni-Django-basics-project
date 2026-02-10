@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="flex flex-col border mx-auto my-auto mt-10 w-120 h-140 items-start overflow-y-auto overflow-x-hidden">
+        {% for animal in animals %}
+        <div class="flex border w-115 rounded-sm justify-center p-2 m-2 bg-white">
+            <a class="text-xl hover:text-blue-800" href="{% url 'animal_detail' animal.slug %}">{{ animal.name }}</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,33 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <h1 class="flex justify-center align-center text-2xl mb-6">Details for -  {{ expedition.title }}</h1>
-
-        <div class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
-            <div class="flex flex-col">
-                {% for field in form %}
-                <div class="flex flex-col justify-center items-center">
-                    <label class="text-left items-start justify-start relative mt-2">{{ field.label }}</label>
-                    {% if field.name == 'additional_animals' %}
-                        <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
-                            {{ field }}
-                        </div>
-                    {% elif field.name == 'animal_image' %}
-                      {% if expedition.animal_image %}
-                        <img class="max-w-sm mb-8" src="{{ expedition.animal_image.url }}">
-                      {% else %}
-                        <p>No image available</p>
-                      {% endif %}
-
-
-                    {% else %}
-                        <div class="w-60">
-                            {{ field }}
-                        </div>
-                    {% endif %}
+    <div class="mt-20">
+        <div class="flex flex-col mx-auto my-auto h-110 w-1/2 border rounded-sm shadow-lg overflow-y-auto">
+            <div class="flex flex-col items-center p-8 bg-linear-to-r from-green-300 to-green-400 border-b w-full">
+                    <p class="text-3xl">Expedition Name: {{ expedition.title }}</p>
                 </div>
-                {% endfor %}
+                <div class="text-xl flex flex-col bg-white h-110 w-full">
+                    <div class="p-2">
+                        <p class="p-2 m-4 border-b text-lg">Primary Animal: {{ expedition.primary_animal }}</p>
+                        <p class="p-2 m-4 border-b text-lg">Additional Animals:
+                                {% for animal in expedition.additional_animals.all %}
+                                {{ animal.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %} </p>
+                        <p class="p-2 m-4 border-b text-lg">Description: {{ expedition.description }}</p>
+                        <p class="p-2 m-4 border-b text-lg">Location: {{ expedition.location }}</p>
+                        <p class="p-2 m-4 text-lg">Animal Image:
+                            {% if expedition.animal_image %}
+                            <img src="{{ expedition.animal_image.url }}" alt="animal_image">
+                            {% endif %}</p>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="flex flex-row justify-center mt-8 gap-4">
+        <a href="{% url 'edit_expedition' expedition.pk %}"
+        class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
+        <a href="{% url 'delete_expedition' expedition.pk %}"
+        class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
+    </div>
+
 
 {% endblock %}

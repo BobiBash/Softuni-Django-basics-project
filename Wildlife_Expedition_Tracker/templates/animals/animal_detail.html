@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="mt-20">
+        <div class="flex flex-col mx-auto my-auto h-110 w-1/2 border rounded-sm shadow-lg">
+            <div class="flex flex-col items-center p-8 bg-linear-to-r from-green-300 to-green-400 border-b w-full">
+                <p class="text-3xl">Name: {{ animal.name }}</p>
+                <p class="mt-6 text-xl">Group: {{ animal.group }}</p>
+            </div>
+            <div class="text-xl flex flex-col bg-white h-110 w-full">
+                <div class="p-2">
+                    <p class="p-2 m-4 border-b text-lg">Kingdom: {{ animal.kingdom }}</p>
+                    <p class="p-2 m-4 border-b text-lg">Food: {{ animal.food }}</p>
+                    <p class="p-2 m-4 border-b text-lg">Distinctive Feature: {{ animal.most_distinctive_feature }}</p>
+                    <p class="p-2 m-4 text-lg">Weight: {{ animal.weight }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
