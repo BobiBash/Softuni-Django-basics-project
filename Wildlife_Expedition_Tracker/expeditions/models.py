@@ -11,12 +11,12 @@ class Expedition(models.Model):
         unique=True,
         blank=True,
     )
-    primary_animal = models.ForeignKey(
+    target_species = models.ForeignKey(
         "animals.Animal",
         on_delete=models.CASCADE,
        related_name="primary_expeditions"
     )
-    additional_animals = models.ManyToManyField(
+    expected_species = models.ManyToManyField(
         "animals.Animal",
             related_name="additional_expeditions",
             blank=True
@@ -27,11 +27,6 @@ class Expedition(models.Model):
     )
     location = models.CharField(
         max_length=150,
-    )
-    animal_image = models.ImageField(
-        upload_to="expeditions/",
-        blank=True,
-        null=True
     )
 
     def save(self, *args, **kwargs):

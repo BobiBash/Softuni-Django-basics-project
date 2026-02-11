@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 import asyncio
 
-from .forms import ExpeditionForm
+from .forms import ExpeditionForm, ExpeditionDetailForm
 from .models import Expedition
 
 
@@ -31,10 +31,7 @@ def add_expedition(request: HttpRequest) -> HttpResponse:
 
 def expedition_detail(request: HttpRequest, slug: str) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
-    form = ExpeditionForm(instance=expedition)
-
-    for field in form.fields.values():
-        field.disabled = True
+    form = ExpeditionDetailForm(instance=expedition)
 
     context = {
         "expedition": expedition,
@@ -44,7 +41,7 @@ def expedition_detail(request: HttpRequest, slug: str) -> HttpResponse:
     return render(request, "expeditions/expedition_detail.html", context)
 
 def expeditions_list(request: HttpRequest) -> HttpResponse:
-    expeditions = Expedition.objects.all()
+    expeditions = Expedition.objects.all().order_by("title")
     context = {
         "expeditions": expeditions
     }

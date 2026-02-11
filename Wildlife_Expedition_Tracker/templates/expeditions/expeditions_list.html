@@ -6,7 +6,7 @@
     <a class="mt-5 text-xl border rounded-sm bg-slate-300 hover:bg-slate-400 w-44 text-center p-2" href="{% url 'add_expedition' %}">Add Expedition</a>
 </div>
 <div class="flex justify-center m-8">
-    <div class="grid grid-cols-1 gap-4 p-2 w-3xl border overflow-y-auto">
+    <div class="grid grid-cols-1 gap-2 p-1 w-3xl overflow-y-auto">
         {% for expedition in expeditions %}
         <div class="flex justify-between border rounded-sm p-2 bg-white">
             <div>

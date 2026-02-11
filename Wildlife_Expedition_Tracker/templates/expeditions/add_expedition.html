@@ -4,11 +4,11 @@
         <h1 class="flex justify-center align-center text-2xl mb-6">Add Expedition</h1>
 
         <form class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
-            <div class="flex flex-col">
+            <div class="flex flex-col ">
                 {% csrf_token %}
                 {% for field in form %}
-                <div class="flex flex-col">
-                    <label class="text-left items-start justify-start relative mt-2">{{ field.label }}</label>
+                {{ field.help_text }}
+                <div class="flex flex-col mb-2">
                     {% if field.name == 'additional_animals' %}
                         <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
                             {{ field }}

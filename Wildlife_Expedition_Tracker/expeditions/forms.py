@@ -17,6 +17,14 @@ class ExpeditionForm(forms.ModelForm):
                   'location',
                   'animal_image']
 
+        help_texts = {
+            "title": "Title",
+            'primary_animal': 'Primary Animal',
+            'additional_animals': 'Additional Animals',
+            'description': 'Description',
+            'location': 'Location',
+            'animal_image': 'Animal Image',
+        }
 
 
         widgets = {
@@ -50,5 +58,12 @@ class ExpeditionForm(forms.ModelForm):
             }),
         }
 
+class ExpeditionDetailForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # for field in self.fields.values():
+        #     field.disabled = True
 
-
+    class Meta:
+        model = Expedition
+        exclude = ['created_at']
