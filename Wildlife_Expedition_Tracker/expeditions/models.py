@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from .validators import validate_text
+
 
 # Create your models here.
 class Expedition(models.Model):
@@ -14,11 +16,11 @@ class Expedition(models.Model):
     target_species = models.ForeignKey(
         "animals.Animal",
         on_delete=models.CASCADE,
-       related_name="primary_expeditions"
+        related_name="target_expeditions"
     )
     expected_species = models.ManyToManyField(
         "animals.Animal",
-            related_name="additional_expeditions",
+            related_name="expected_expeditions",
             blank=True
     )
     description = models.TextField()
@@ -27,6 +29,7 @@ class Expedition(models.Model):
     )
     location = models.CharField(
         max_length=150,
+        validators=[validate_text]
     )
 
     def save(self, *args, **kwargs):

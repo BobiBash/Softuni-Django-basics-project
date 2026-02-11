@@ -7,22 +7,23 @@
             {% for field in form %}
             <div class="flex flex-col justify-center items-center">
                 <label class="text-left items-start justify-start relative mt-2">{{ field.label }}</label>
-                {% if field.name == 'additional_animals' %}
+                {% if field.name == 'expected_species' %}
                     <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
                         {{ field }}
                     </div>
-                {% elif field.name == 'animal_image' %}
-                  {% if expedition.animal_image %}
-                    <img class="max-w-sm mb-8" src="{{ expedition.animal_image.url }" alt="animal_image">
-                  {% else %}
-                    <p>No image available</p>
-                  {% endif %}
-
-
                 {% else %}
-                    <div class="w-60">
-                        {{ field }}
-                    </div>
+                {% comment %}
+                {% if field.name == 'animal_image' %}
+                    {% if expedition.animal_image %}
+                        <img class="max-w-sm mb-8" src="{{ expedition.animal_image.url }}" alt="animal_image">
+                    {% endif %}
+                {% endif %}
+                {% endcomment %}
+
+
+                <div class="w-60">
+                    {{ field }}
+                </div>
                 {% endif %}
             </div>
             {% endfor %}

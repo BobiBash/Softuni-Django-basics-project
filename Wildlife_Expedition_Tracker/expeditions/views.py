@@ -51,7 +51,7 @@ def edit_expedition(request: HttpRequest, pk: int) -> HttpResponse:
     expedition = get_object_or_404(Expedition, pk=pk)
 
     if request.method == "POST":
-        form = ExpeditionForm(request.POST, request.FILES, instance=expedition)
+        form = ExpeditionForm(request.POST, instance=expedition)
         if form.is_valid():
             form.save()
             messages.success(request, "Expedition Updated Successfully")

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <h1 class="flex justify-center align-center text-2xl mb-6">Add Expedition</h1>
+        <h1 class="flex justify-center align-center text-2xl mb-6">Register Expedition</h1>
 
         <form class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
             <div class="flex flex-col ">
@@ -9,7 +9,7 @@
                 {% for field in form %}
                 {{ field.help_text }}
                 <div class="flex flex-col mb-2">
-                    {% if field.name == 'additional_animals' %}
+                    {% if field.name == 'expected_species' %}
                         <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
                             {{ field }}
                         </div>
@@ -20,7 +20,7 @@
                     {% endif %}
                 </div>
                 {% endfor %}
-                <button class="border rounded-sm p-2 m-8 bg-slate-300 hover:bg-slate-400" type="submit">Add Expedition</button>
+                <button class="border rounded-sm p-2 m-8 bg-slate-300 hover:bg-slate-400" type="submit">Register Expedition</button>
             </div>
         </form>
 
