@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for sighting in sightings %}
+        {{ sighting.expedition.title }}
+        {{ sighting.observed_at }}
+    <a href="{% url 'edit_sighting' expedition.slug sighting.pk %}">Edit</a>
+    {% endfor %}
+    <p> hi</p>
+{% endblock %}

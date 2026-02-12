@@ -19,8 +19,8 @@ class ExpeditionForm(forms.ModelForm):
 
         help_texts = {
             "title": "Title",
-            'target_species': 'Primary Animal',
-            'expected_species': 'Additional Animals',
+            'target_species': 'Target Species',
+            'expected_species': 'Expected Species',
             'description': 'Description',
             'location': 'Location',
         }
@@ -38,6 +38,7 @@ class ExpeditionForm(forms.ModelForm):
                 'placeholder': 'Choose an animal',
             }),
             'expected_species': forms.CheckboxSelectMultiple(attrs={
+                'class': 'flex-inline'
             }),
             'description': forms.Textarea(attrs={
                 'style':'resize:none; background-color: white',
@@ -57,12 +58,9 @@ class ExpeditionForm(forms.ModelForm):
             # }),
         }
 
-class ExpeditionDetailForm(forms.ModelForm):
+class ExpeditionDeleteForm(ExpeditionForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # for field in self.fields.values():
-        #     field.disabled = True
-
-    class Meta:
-        model = Expedition
-        exclude = ['created_at']
+        for field in self.fields.values():
+            field.disabled = True
+            field.read_only = True

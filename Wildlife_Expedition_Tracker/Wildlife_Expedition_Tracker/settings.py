@@ -35,7 +35,8 @@ ALLOWED_HOSTS = []
 # Application definition
 PROJECT_APPS = ["analytics_dashboard",
                 "animals", "common",
-                "expeditions", "media_gallery"]
+                "expeditions", "media_gallery",
+                "sightings"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,17 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'tailwind',
-    'theme',
+    'django_tailwind_cli',
+    "django_browser_reload",
 ] + PROJECT_APPS
 
-TAILWIND_APP_NAME = "theme"
-NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
 
-if DEBUG:
-    # Add django_browser_reload only in DEBUG mode
-    INSTALLED_APPS += ["django_browser_reload"]
 
 
 
@@ -66,13 +61,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
-if DEBUG:
-    # Add django_browser_reload middleware only in DEBUG mode
-    MIDDLEWARE += [
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
-    ]
 
 
 ROOT_URLCONF = 'Wildlife_Expedition_Tracker.urls'
@@ -145,6 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [BASE_DIR / "assets"]
 
 MEDIA_ROOT = BASE_DIR / "media"
 

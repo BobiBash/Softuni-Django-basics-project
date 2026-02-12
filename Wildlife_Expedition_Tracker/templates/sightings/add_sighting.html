@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit">Register sighting</button>
+    </form>
+{% endblock %}

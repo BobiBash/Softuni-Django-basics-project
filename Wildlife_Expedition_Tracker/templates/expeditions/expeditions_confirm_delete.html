@@ -3,10 +3,25 @@
 {% block content %}
 <div class="flex flex-col items-center mt-10">
     <h1 class="text-2xl mb-6">Are you sure you want to delete "{{ expedition.title }}"?</h1>
-    
-    <form method="post">
-        {% csrf_token %}
-        <div class="flex gap-4">
+
+    <form class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
+        <div class="flex flex-col ">
+            {% csrf_token %}
+            {% for field in form %}
+            {{ field.help_text }}
+            <div class="flex flex-col mb-2">
+                {% if field.name == 'expected_species' %}
+                    <div class="p-2 w-60 max-h-40 overflow-y-auto border rounded bg-white">
+                        {{ field }}
+                    </div>
+                {% else %}
+                    <div class="w-60">
+                        {{ field }}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        <div class="flex gap-4 mt-4 mb-4">
             <button type="submit" class="border rounded-sm px-6 py-2 bg-red-500 hover:bg-red-600 text-white">
                 Yes, Delete
             </button>

@@ -15,20 +15,21 @@
                                 {% endfor %} </p>
                         <p class="p-2 m-4 border-b text-lg">Description: {{ expedition.description }}</p>
                         <p class="p-2 m-4 border-b text-lg">Location: {{ expedition.location }}</p>
-<!--                        <p class="p-2 m-4 text-lg">Animal Image:-->
-<!--                            {% if expedition.animal_image %}-->
-<!--                            <img src="{{ expedition.animal_image.url }}" alt="animal_image">-->
-<!--                            {% endif %}</p>-->
+                        {% comment %}
+                        <p class="p-2 m-4 text-lg">Animal Image:
+                          {% if expedition.animal_image %}
+                            <img src="{{ expedition.animal_image.url }}" alt="animal_image">
+                        {% endcomment %}
                 </div>
             </div>
         </div>
     </div>
     <div class="flex flex-row justify-center mt-8 gap-4">
-        <a href="{% url 'edit_expedition' expedition.pk %}"
-        class="flex items-center justify-center border rounded-sm  h-12 w-40 bg-slate-300 hover:bg-slate-400">Add sighting</a>
-        <a href="{% url 'edit_expedition' expedition.pk %}"
+        <a href="{% url 'add_sighting' expedition.slug %}"
+        class="flex items-center justify-center border rounded-sm  h-10 w-34 bg-slate-300 hover:bg-slate-400">Add sighting</a>
+        <a href="{% url 'edit_expedition' expedition.slug %}"
         class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
-        <a href="{% url 'delete_expedition' expedition.pk %}"
+        <a href="{% url 'delete_expedition' expedition.slug %}"
         class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
     </div>
 

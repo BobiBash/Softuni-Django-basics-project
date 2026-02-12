@@ -4,7 +4,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 import asyncio
 
-from .forms import ExpeditionForm, ExpeditionDetailForm
+from django.utils.text import slugify
+
+from .forms import ExpeditionForm, ExpeditionDeleteForm
 from .models import Expedition
 
 
@@ -31,11 +33,9 @@ def add_expedition(request: HttpRequest) -> HttpResponse:
 
 def expedition_detail(request: HttpRequest, slug: str) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
-    form = ExpeditionDetailForm(instance=expedition)
 
     context = {
         "expedition": expedition,
-        "form": form,
     }
 
     return render(request, "expeditions/expedition_detail.html", context)
@@ -47,30 +47,35 @@ def expeditions_list(request: HttpRequest) -> HttpResponse:
     }
     return render(request, "expeditions/expeditions_list.html", context)
 
-def edit_expedition(request: HttpRequest, pk: int) -> HttpResponse:
-    expedition = get_object_or_404(Expedition, pk=pk)
+def edit_expedition(request: HttpRequest, slug: str) -> HttpResponse:
+    expedition = get_object_or_404(Expedition, slug=slug)
 
     if request.method == "POST":
         form = ExpeditionForm(request.POST, instance=expedition)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Expedition Updated Successfully")
+            expedition = form.save(commit=False)
+            expedition.slug = slugify(expedition.title)
+            expedition.save()
             return redirect('expeditions_list')
 
     form = ExpeditionForm(instance=expedition)
     context = {
+        "expedition": expedition,
         "form": form,
     }
     return render(request, "expeditions/edit_expedition.html", context)
 
-def delete_expedition(request: HttpRequest, pk: int) -> HttpResponse:
-    expedition = get_object_or_404(Expedition, pk=pk)
+def delete_expedition(request: HttpRequest, slug: str) -> HttpResponse:
+    expedition = get_object_or_404(Expedition, slug=slug)
+    form = ExpeditionDeleteForm(instance=expedition)
+
     if request.method == "POST":
         expedition.delete()
         return redirect('expeditions_list')
 
     context = {
-        "expedition": expedition
+        "expedition": expedition,
+        "form": form
     }
 
     return render(request, 'expeditions/expeditions_confirm_delete.html', context)
