@@ -19,9 +19,9 @@
             <div class="flex gap-2 items-center">
                 <a href="{% url 'sighting_list' expedition.slug %}"
                 class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Sightings</a>
-                <a href="{% url 'edit_expedition' expedition.pk %}"
+                <a href="{% url 'edit_expedition' expedition.slug %}"
                 class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
-                <a href="{% url 'delete_expedition' expedition.pk %}"
+                <a href="{% url 'delete_expedition' expedition.slug %}"
                 class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
             </div>
         </div>

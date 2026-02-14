@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for sighting in sightings %}
-        {{ sighting.expedition.title }}
-        {{ sighting.observed_at }}
-    <a href="{% url 'edit_sighting' expedition.slug sighting.pk %}">Edit</a>
-    {% endfor %}
-    <p> hi</p>
+
+<div class="flex justify-center">
+    <a class="mt-5 text-xl border rounded-sm bg-slate-300 hover:bg-slate-400 w-44 text-center p-2" href="{% url 'add_sighting' expedition.slug %}">Register Sighting</a>
+</div>
+<div class="flex justify-center m-8">
+    <div class="grid grid-cols-1 gap-2 p-1 w-3xl overflow-y-auto">
+        {% for sighting in sightings %}
+        <div class="flex justify-between border rounded-sm p-2 bg-white">
+            <div>
+                <a href="{% url 'expedition_detail' expedition.slug %} " class="underline hover:text-blue-800">
+                    <p class="text-xl">{{ sighting.animal }}</p>
+                </a>
+                <p>Observed at: {{ sighting.observed_at_date }} - {{ sighting.observed_at_time }}</p>
+            </div>
+
+            <div class="flex gap-2 items-center">
+                <a href="{% url 'edit_sighting' expedition.slug sighting.pk %}"
+                class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
+                <a href="{% url 'delete_expedition' expedition.slug %}"
+                class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
+            </div>
+        </div>
+        {% empty %}
+            <h1 class="">No sightings registered yet.</h1>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

@@ -19,7 +19,9 @@ class Sighting(models.Model):
         related_name='sightings'
     )
 
-    observed_at = models.DateTimeField()
+    observed_at_date = models.DateField()
+
+    observed_at_time = models.TimeField()
 
     count = models.PositiveIntegerField()
 

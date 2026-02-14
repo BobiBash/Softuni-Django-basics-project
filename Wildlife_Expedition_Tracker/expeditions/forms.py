@@ -28,34 +28,26 @@ class ExpeditionForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={
-                'class': 'border rounded-sm p-2 w-full',
-                'style': 'background-color: white;',
+                'class': 'border rounded-sm p-2 w-full bg-white',
                 'placeholder': 'Enter expedition title',
             }),
             'target_species': forms.Select(attrs={
-                'class': 'border rounded-sm p-2 w-full appearance-none',
-                'style': 'background-color: white;',
+                'class': 'border rounded-sm p-2 w-full bg-white',
                 'placeholder': 'Choose an animal',
             }),
             'expected_species': forms.CheckboxSelectMultiple(attrs={
                 'class': 'flex-inline'
             }),
             'description': forms.Textarea(attrs={
-                'style':'resize:none; background-color: white',
+                'style':'resize:none;',
                 'rows':'5',
-                'class': 'border rounded-sm p-2 w-full',
+                'class': 'border rounded-sm p-2 w-full bg-white',
 
             }),
             'location': forms.TextInput(attrs={
-                'class': 'border rounded-sm p-2 w-full',
-                'style': 'background-color: white;',
+                'class': 'border rounded-sm p-2 w-full bg-white',
                 'placeholder': 'e.g, Amazon Rainforest, Brazil'
             }),
-            # "animal_image": forms.FileInput(attrs={
-            #     'class': 'block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600',
-            #     'style': 'background-color: white;',
-            #     'id': 'id_animal_image',
-            # }),
         }
 
 class ExpeditionDeleteForm(ExpeditionForm):
