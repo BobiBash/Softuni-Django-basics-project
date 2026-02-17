@@ -1,11 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="POST" enctype="multipart/form-data">
-        {{ form }}
-        {% csrf_token %}
-        <button type="submit">Register sighting</button>
+    <form class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
+        <div class="flex flex-col">
+            {% csrf_token %}
+            {% for field in form %}
+            {% if field.name == 'animal_image' %}
+                <div class="flex items-center justify-center">
+                    {{ field.help_text }}
+                </div>
+            {% else %}
+                <div class=''>
+                    {{ field.help_text }}
+                </div>
+            {% endif %}
+                {% if field.name == 'animal_image' %}
+                    {% if sighting.animal_image %}
+                        <img class="max-w-sm mb-2" src="{{ sighting.animal_image.url }}" alt="animal_image">
+                    {% endif %}
+                {% endif %}
+            <div class="flex flex-col items-center mb-2">
+                {% if field.name == 'expected_species' %}
+                    <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
+                        {{ field }}
+                    </div>
+                {% else %}
+                <div class="w-60">
+                    {{ field }}
+                </div>
+                {% endif %}
 
+            </div>
+            {% endfor %}
+
+        </div>
         <div class="flex gap-4 mt-4 mb-4">
         <button type="submit" class="border rounded-sm px-6 py-2 bg-red-500 hover:bg-red-600 text-white">
             Yes, Delete
@@ -15,5 +43,6 @@
         </a>
         </div>
     </form>
+
 
 {% endblock %}

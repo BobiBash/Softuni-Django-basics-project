@@ -11,7 +11,7 @@ class SightingForm(forms.ModelForm):
 
     observed_at_time = forms.TimeField(
         help_text='Observed at - time',
-        input_formats=['%H:%M', '%I:%M %p'],
+        input_formats=['%H:%M', '%I:%M %p', '%H:%M:%S'],
         validators=[validate_time],
         error_messages={
             'invalid': 'Invalid time. Use HH:MM format',
@@ -21,7 +21,7 @@ class SightingForm(forms.ModelForm):
             'type': 'text',
             'class': 'border rounded-sm p-2 w-full bg-white',
             'placeholder': 'HH:MM (e.g., 14:30)',
-            'pattern': '[0-2][0-9]:[0-5][0-9]',
+            'pattern': '[0-2][0-9]:[0-5][0-9]:[0-5][0-9]',
         }),
     )
 
@@ -40,8 +40,8 @@ class SightingForm(forms.ModelForm):
 
         help_texts = {
             'animal': 'Animal',
-            'observed_at_date': 'Observed at date',
-            'observed_at_time': 'Observed at time',
+            'observed_at_date': 'Observed at - date',
+            'observed_at_time': 'Observed at - time',
             'count': 'Count',
             'latitude': 'Latitude(-90 to 90)',
             'longitude': 'Longitude(-180 to 180)',

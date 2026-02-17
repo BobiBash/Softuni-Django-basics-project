@@ -19,7 +19,7 @@
             <div class="flex gap-2 items-center">
                 <a href="{% url 'edit_sighting' expedition.slug sighting.pk %}"
                 class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
-                <a href="{% url 'delete_expedition' expedition.slug %}"
+                <a href="{% url 'delete_sighting' expedition.slug sighting.pk %}"
                 class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
             </div>
         </div>

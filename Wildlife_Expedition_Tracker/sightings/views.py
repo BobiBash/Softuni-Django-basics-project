@@ -61,7 +61,9 @@ def edit_sighting(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
 
     if request.method == 'POST':
         form = SightingForm(request.POST, request.FILES, instance=sighting)
+        print(f"Form data: {request.POST}")
         if form.is_valid():
+            print("form is valid")
             sighting.save()
             return redirect('sighting_list', slug=slug)
 
@@ -77,14 +79,17 @@ def edit_sighting(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
 def delete_sighting(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
     sighting = get_object_or_404(Sighting, expedition=expedition, pk=pk)
-    form = SightingDeletingForm()
 
     if request.method == 'POST':
+        form = SightingDeletingForm(request.POST, request.FILES, instance=sighting)
+        if form.is_valid():
+            sighting.delete()
+            return redirect('sighting_list', slug=slug)
 
-        sighting.delete()
-        return redirect('sighting_list', slug=slug)
+    form = SightingDeletingForm()
 
     context = {
+        'sighting': sighting,
         'form': form
     }
 
