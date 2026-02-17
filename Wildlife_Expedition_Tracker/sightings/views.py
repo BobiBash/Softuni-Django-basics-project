@@ -8,7 +8,7 @@ from expeditions.models import Expedition
 
 # Create your views here.
 
-def sighting_list(request: HttpRequest, slug) -> HttpResponse:
+def sighting_list(request: HttpRequest, slug: str) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
     sightings = Sighting.objects.filter(expedition=expedition).order_by('-observed_at_date')
 
@@ -19,8 +19,15 @@ def sighting_list(request: HttpRequest, slug) -> HttpResponse:
 
     return render(request, 'sightings/sighting_list.html', context)
 
-def sighting_detail(request: HttpRequest, slug: str) -> HttpResponse:
-    ...
+def sighting_detail(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
+    expedition = get_object_or_404(Expedition, slug=slug)
+    sighting = get_object_or_404(Sighting, expedition=expedition, pk=pk)
+
+    context = {
+        'sighting': sighting,
+    }
+
+    return render(request, 'sightings/sighting_detail.html', context)
 
 def add_sighting(request: HttpRequest, slug: str) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
@@ -94,3 +101,4 @@ def delete_sighting(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
     }
 
     return render(request, 'sightings/delete_sighting.html', context)
+

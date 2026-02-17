@@ -10,7 +10,7 @@
         {% for sighting in sightings %}
         <div class="flex justify-between border rounded-sm p-2 bg-white">
             <div>
-                <a href="{% url 'expedition_detail' expedition.slug %} " class="underline hover:text-blue-800">
+                <a href="{% url 'sighting_detail' expedition.slug sighting.pk %} " class="underline hover:text-blue-800">
                     <p class="text-xl">{{ sighting.animal }}</p>
                 </a>
                 <p>Observed at: {{ sighting.observed_at_date }} - {{ sighting.observed_at_time }}</p>

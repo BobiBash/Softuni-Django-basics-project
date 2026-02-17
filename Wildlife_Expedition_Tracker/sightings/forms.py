@@ -21,7 +21,7 @@ class SightingForm(forms.ModelForm):
             'type': 'text',
             'class': 'border rounded-sm p-2 w-full bg-white',
             'placeholder': 'HH:MM (e.g., 14:30)',
-            'pattern': '[0-2][0-9]:[0-5][0-9]:[0-5][0-9]',
+            'pattern': '[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?',
         }),
     )
 

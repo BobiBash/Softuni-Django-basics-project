@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="flex flex-wrap gap-2 justify-start my-10 mx-40">
+    {% for sighting in sighting_images %}
+            <a class="block h-74 w-74.5 border" href="{% url 'sighting_detail' slug=sighting.expedition.slug pk=sighting.pk %}">
+                <img class="object-cover w-full h-full" src="{{ sighting.animal_image.url }}" alt="animal image">
+            </a>
+    {% endfor %}
+    </div>
+{% endblock %}

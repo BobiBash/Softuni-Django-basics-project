@@ -25,8 +25,6 @@ urlpatterns = [
     path("animals/", include("animals.urls")),
     path("analytics/", include("analytics_dashboard.urls")),
     path("expeditions/", include("expeditions.urls")),
-    path('expeditions/', include('sightings.urls')),
-    path("gallery/", include("media_gallery.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 

@@ -8,6 +8,7 @@ from django.utils.text import slugify
 
 from .forms import ExpeditionForm, ExpeditionDeleteForm
 from .models import Expedition
+from sightings.models import Sighting
 
 
 # Create your views here.
@@ -79,3 +80,4 @@ def delete_expedition(request: HttpRequest, slug: str) -> HttpResponse:
     }
 
     return render(request, 'expeditions/expeditions_confirm_delete.html', context)
+
