@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {{ top_animal.animal__name }} - {{ top_animal.animal_count }}
-    {{ top_location.location }} - {{ top_location.location_count }}
+<div class="flex h-150">
+    <div class="flex mx-auto my-auto p-20 border">
+        {{ top_animal.animal__name }} - {{ top_animal.animal_count }}
+        {{ top_location.location }} - {{ top_location.location_count }}
+    </div>
+</div>
 {% endblock %}

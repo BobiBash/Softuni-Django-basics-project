@@ -1,4 +1,4 @@
-/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.2.0 | MIT License | https://tailwindcss.com */
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -261,6 +261,15 @@
   .grid {
     display: grid;
   }
+  .h-1\/2 {
+    height: calc(1 / 2 * 100%);
+  }
+  .h-1\/10 {
+    height: calc(1 / 10 * 100%);
+  }
+  .h-9\/10 {
+    height: calc(9 / 10 * 100%);
+  }
   .h-10 {
     height: calc(var(--spacing) * 10);
   }
@@ -269,6 +278,18 @@
   }
   .h-110 {
     height: calc(var(--spacing) * 110);
+  }
+  .h-150 {
+    height: calc(var(--spacing) * 150);
+  }
+  .h-157 {
+    height: calc(var(--spacing) * 157);
+  }
+  .h-\[315px\] {
+    height: 315px;
+  }
+  .h-\[630px\] {
+    height: 630px;
   }
   .h-auto {
     height: auto;
@@ -279,14 +300,23 @@
   .max-h-40 {
     max-height: calc(var(--spacing) * 40);
   }
+  .min-h-1\/2 {
+    min-height: calc(1 / 2 * 100%);
+  }
+  .min-h-3\/4 {
+    min-height: calc(3 / 4 * 100%);
+  }
   .min-h-96 {
     min-height: calc(var(--spacing) * 96);
+  }
+  .min-h-120 {
+    min-height: calc(var(--spacing) * 120);
   }
   .min-h-screen {
     min-height: 100vh;
   }
   .w-1\/2 {
-    width: calc(1/2 * 100%);
+    width: calc(1 / 2 * 100%);
   }
   .w-3xl {
     width: var(--container-3xl);
@@ -432,6 +462,9 @@
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
+  .p-20 {
+    padding: calc(var(--spacing) * 20);
+  }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
   }
@@ -452,6 +485,9 @@
   }
   .text-left {
     text-align: left;
+  }
+  .align-middle {
+    vertical-align: middle;
   }
   .text-2xl {
     font-size: var(--text-2xl);
