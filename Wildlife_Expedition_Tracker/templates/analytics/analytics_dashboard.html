@@ -2,9 +2,32 @@
 
 {% block content %}
 <div class="flex h-150">
-    <div class="flex mx-auto my-auto p-20 border">
-        {{ top_animal.animal__name }} - {{ top_animal.animal_count }}
-        {{ top_location.location }} - {{ top_location.location_count }}
+    <div class="flex mx-auto my-auto p-8 border rounded-sm bg-white">
+        <div class="flex flex-col mx-8">
+            <div class="list-disc list-inside space-y-2 items-baseline">
+                <p class="text-3xl font-extrabold">Top animals</p>
+                {% for animal in top_animals %}
+                        {% if forloop.counter == 1 %}
+                        <p class="text-2xl font-semibold w-66">{{ forloop.counter }}. {{ animal.animal__name }} - {{ animal.animal_count }}</p>
+                        {% else %}
+                        <p class="pl-0.5 text-base w-66">{{ forloop.counter }}. {{ animal.animal__name }} - {{ animal.animal_count }}</p>
+                        {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="flex flex-col mx-8">
+            <div class="space-y-2 items-baseline">
+                <p class="text-3xl font-extrabold">Top Locations</p>
+                {% for location in top_locations %}
+                        {% if forloop.counter == 1 %}
+                        <p class="text-2xl font-semibold w-36">{{ forloop.counter }}. {{ location.location }} - {{ location.location_count }}</p>
+                        {% else %}
+                        <p class="pl-0.5 text-base w-36">{{ forloop.counter }}. {{ location.location }} - {{ location.location_count }}</p>
+                        {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <img src="data:image/png;base64,{{ chart }}" class="w-full" alt="chart"/>
     </div>
 </div>
 {% endblock %}
