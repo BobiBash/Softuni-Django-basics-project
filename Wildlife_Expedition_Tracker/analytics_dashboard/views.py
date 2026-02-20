@@ -62,11 +62,12 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
     labels[-1] = last_day.strftime('%d %b')
     values = [data_dict.get(day, 0) for day in days]
 
-    fig, ax = plt.subplots(figsize=(6, 3))
+    fig, ax = plt.subplots(figsize=(5, 3))
     ax.plot(days, values, marker='None', linewidth=1, color='steelblue')
+    plt.title("Average monthly expeditions ")
     ax.set_yticks(range(0, int(max(values)) + 2, 1))
     ax.xaxis.set_major_locator(DayLocator(interval=5))
-    ax.set_xlim(days[0] - dt.timedelta(days=1), days[-1] + dt.timedelta(days=1))
+    ax.set_xlim(days[0], days[-1])
     ax.xaxis.set_major_formatter(DateFormatter('%d %b'))
     plt.tight_layout()
 

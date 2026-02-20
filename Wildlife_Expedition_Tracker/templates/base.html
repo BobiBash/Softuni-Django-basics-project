@@ -8,6 +8,7 @@
     <title>{% block title %}Wildlife Expedition Tracker{% endblock %}</title>
     {% tailwind_css %}
     <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 <body class="flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -15,6 +16,19 @@
         <a class="p-2" href="{% url 'home' %}">Home</a>
         <a class="p-2" href="https://github.com/BobiBash">Github</a>
         <a class="p-2" href="#about">About</a>
+        <!-- Dropdown -->
+        <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+            <a href="#" @click.prevent="open = !open" class="flex items-center p-2 cursor-pointer select-none">
+                Explore ▾
+            </a>
+            <ul x-show="open" class="absolute top-full left-0 bg-amber-100 shadow-md z-10 min-w-36">
+                <li><a href="{% url 'expeditions_list' %}" class="block px-4 py-2 hover:bg-amber-200 whitespace-nowrap">Expeditions</a></li>
+                <li><a href="{% url 'animals_list' %}" class="block px-4 py-2 hover:bg-amber-200 whitespace-nowrap">Animals</a></li>
+                <li><a href="{% url 'media_gallery' %}" class="block px-4 py-2 hover:bg-amber-200 whitespace-nowrap">Gallery</a></li>
+                <li><a href="{% url 'analytics_dashboard' %}" class="block px-4 py-2 hover:bg-amber-200 whitespace-nowrap">Analytics</a></li>
+            </ul>
+        </div>
+
     </div>
 
     <!-- Main Content -->
