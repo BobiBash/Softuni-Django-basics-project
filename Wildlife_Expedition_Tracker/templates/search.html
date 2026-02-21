@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="GET" action="{% url 'search' %}">
+    {{ form.query }}
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <ul>
+        {% for item in results %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+{% elif request.GET.query %}
+    <p>No results found.</p>
+{% endif %}
+{% endblock %}

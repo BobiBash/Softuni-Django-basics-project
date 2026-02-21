@@ -29,10 +29,15 @@
             </ul>
         </div>
 
+
     </div>
 
     <!-- Main Content -->
     <main class="flex-grow bg-emerald-50">
+        <form method="GET" action="{% url 'search' %}">
+            {{ form.query }}
+            <button type="submit">Search</button>
+        </form>
         {% block content %}{% endblock %}
     </main>
 
