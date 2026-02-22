@@ -59,7 +59,7 @@ The project utilizes a relational PostgreSQL database with the following key mod
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/BobiBash/Softuni-Django-basics-project
 cd Wildlife_Expedition_Tracker
 ```
 
@@ -94,9 +94,33 @@ python manage.py migrate
 
 ### 7. Run the Application
 ```bash
-python manage.py runserver
+python manage.py tailwind runserver
 ```
 The application will be accessible at `http://127.0.0.1:8000/`.
+
+### 8. Custom 404
+I've set up a /404 url to view the custom 404.
+Incase the custom 404 needs to be viewed with Debug=False do the following:
+```bash
+pip install whitenoise
+```
+Add it to MIDDLEWARE like so:
+```bash
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # add this
+    ...
+]
+```
+Then add it to settings.py like so:
+```bash
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+```
+Then run:
+```bash
+python manage.py collectstatic
+```
 
 ---
 
