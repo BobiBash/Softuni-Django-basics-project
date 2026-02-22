@@ -2,8 +2,9 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.text import slugify
 
-from sightings.models import Sighting
+from expeditions.models import Expedition
 from animals.models import Animal
+
 
 from .forms import SearchForm
 
@@ -36,12 +37,21 @@ def search_view(request:HttpRequest) -> HttpResponse:
         query = form.cleaned_data.get('query')
         print(query)
         if query:
-            results = Animal.objects.filter(name__icontains=query)
-        return redirect(f'animals/{slugify(query)}')
+            # Search in animal model
+            animal_results = Animal.objects.filter(name__icontains=query)
+
+            # Search in expedition model
+            expedition_results = Expedition.objects.filter(title__icontains=query)
+
+            results = [
+                *[{'type': 'Animal', 'name': a.name, 'url': a.get_absolute_url()} for a in animal_results],
+                *[{'type': 'Expedition', 'name': e.title, 'url': e.get_absolute_url()} for e in expedition_results],
+            ]
 
     context = {
         'form': form,
-        'results': results
+        'results': results,
+        'query': request.GET.get('query', '')
     }
 
-    return render(request, 'common/home.html', context)
+    return render(request, 'common/search.html', context)

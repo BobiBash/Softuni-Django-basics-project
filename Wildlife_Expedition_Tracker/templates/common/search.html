@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-8 px-4">
+    <h1 class="text-2xl mb-4">Results for: "{{ query }}"</h1>
+
+    {% if results %}
+        <ul class="space-y-2">
+            {% for item in results %}
+                <li class="border rounded p-3 bg-white flex justify-between items-center">
+                    <a href="{{ item.url }}" class="text-lg hover:underline">{{ item.name }}</a>
+                    <span class="text-xs text-gray-500 uppercase">{{ item.type }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found for "{{ query }}".</p>
+    {% endif %}
+</div>
+{% endblock %}

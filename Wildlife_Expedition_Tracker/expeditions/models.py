@@ -49,3 +49,7 @@ class Expedition(models.Model):
             counter += 1
 
         return slug
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("expedition_detail", kwargs={"slug": self.slug})

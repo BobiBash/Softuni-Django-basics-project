@@ -12,7 +12,7 @@
 </head>
 <body class="flex flex-col min-h-screen">
     <!-- Navigation -->
-    <div class="flex flex-row bg-amber-50">
+    <nav class="flex flex-row bg-amber-50 p-2">
         <a class="p-2" href="{% url 'home' %}">Home</a>
         <a class="p-2" href="https://github.com/BobiBash">Github</a>
         <a class="p-2" href="#about">About</a>
@@ -28,16 +28,28 @@
                 <li><a href="{% url 'analytics_dashboard' %}" class="block px-4 py-2 hover:bg-amber-200 whitespace-nowrap">Analytics</a></li>
             </ul>
         </div>
+        <div class="absolute left-1/2 -translate-x-1/2">
+            <form method="GET" action="{% url 'search' %}" class="flex border rounded-sm items-center">
+                <input type="text" name="query" class="w-150 outline-none pl-2" placeholder="Search..." value="{{ request.GET.query }}">
+                <button type="submit" class="p-2 bg-amber-200">Search</button>
+            </form>
+
+        {% if results %}
+            <ul>
+                {% for item in results %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% elif request.GET.query %}
+            <p>No results found.</p>
+        {% endif %}
+        </div>
 
 
-    </div>
+    </nav>
 
     <!-- Main Content -->
     <main class="flex-grow bg-emerald-50">
-        <form method="GET" action="{% url 'search' %}">
-            {{ form.query }}
-            <button type="submit">Search</button>
-        </form>
         {% block content %}{% endblock %}
     </main>
 

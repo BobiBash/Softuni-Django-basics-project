@@ -20,3 +20,7 @@ class Animal(models.Model):
             self.slug = slugify(self.name)
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("animal_detail", kwargs={"slug": self.slug})
