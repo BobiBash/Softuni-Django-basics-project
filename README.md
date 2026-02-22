@@ -59,7 +59,7 @@ The project utilizes a relational PostgreSQL database with the following key mod
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/BobiBash/Softuni-Django-basics-project
 cd Wildlife_Expedition_Tracker
 ```
 
