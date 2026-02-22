@@ -21,6 +21,7 @@ from expeditions.models import Expedition
 
 # Create your views here.
 def analytics_dashboard(request: HttpRequest) -> HttpResponse:
+
     top_animals = (Sighting
     .objects
     .values('animal__name')
@@ -62,12 +63,16 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
     labels[-1] = last_day.strftime('%d %b')
     values = [data_dict.get(day, 0) for day in days]
 
-    fig, ax = plt.subplots(figsize=(5, 3))
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.tick_params(axis='x', labelsize=18)
+    ax.tick_params(axis='y', labelsize=18)
     ax.plot(days, values, marker='None', linewidth=1, color='steelblue')
-    plt.title("Average monthly expeditions ")
+    plt.title("Average monthly expeditions (last month)", fontsize=18)
     ax.set_yticks(range(0, int(max(values)) + 2, 1))
-    ax.xaxis.set_major_locator(DayLocator(interval=5))
-    ax.set_xlim(days[0], days[-1])
+    ax.margins(x=0.02)
+    interval = 5
+    tick_days = [days[0]] + days[interval::interval] + [days[-1]]
+    ax.set_xticks(tick_days)
     ax.xaxis.set_major_formatter(DateFormatter('%d %b'))
     plt.tight_layout()
 

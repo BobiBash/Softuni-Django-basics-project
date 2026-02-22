@@ -4,6 +4,7 @@ from django.utils.text import slugify
 
 from expeditions.models import Expedition
 from animals.models import Animal
+from sightings.models import Sighting
 
 
 from .forms import SearchForm
@@ -30,12 +31,10 @@ def media_gallery(request: HttpRequest) -> HttpResponse:
 def search_view(request:HttpRequest) -> HttpResponse:
     form = SearchForm(request.GET or None)
     results = []
-    print(form)
 
     if form.is_valid():
-        print("form is valid")
         query = form.cleaned_data.get('query')
-        print(query)
+
         if query:
             # Search in animal model
             animal_results = Animal.objects.filter(name__icontains=query)

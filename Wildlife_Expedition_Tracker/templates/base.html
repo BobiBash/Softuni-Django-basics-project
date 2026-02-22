@@ -30,19 +30,17 @@
         </div>
         <div class="absolute left-1/2 -translate-x-1/2">
             <form method="GET" action="{% url 'search' %}" class="flex border rounded-sm items-center">
-                <input type="text" name="query" class="w-150 outline-none pl-2" placeholder="Search..." value="{{ request.GET.query }}">
+                <input type="text" list="search-options" name="query" class="w-150 outline-none pl-2 bg-white" placeholder="Search..." value="{{ request.GET.query }}">
+                <datalist id="search-options">
+                    {% for animal in animals %}
+                        <option value="{{ animal.name }}"></option>
+                    {% endfor %}
+                    {% for expedition in expeditions %}
+                        <option value="{{ expedition.title }}"></option>
+                    {% endfor %}
+                </datalist>
                 <button type="submit" class="p-2 bg-amber-200">Search</button>
             </form>
-
-        {% if results %}
-            <ul>
-                {% for item in results %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        {% elif request.GET.query %}
-            <p>No results found.</p>
-        {% endif %}
         </div>
 
 

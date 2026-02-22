@@ -32,18 +32,14 @@ def sighting_detail(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
 def add_sighting(request: HttpRequest, slug: str) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
 
-    form= SightingForm(request.POST, request.FILES)
-    print(f"Form data: {request.POST}")
-    print(f"Is valid: {form.is_valid()}")
-    print(f"Errors: {form.errors}")
-    print(f"Time field errors: {form['observed_at_time'].errors}")
+    form = SightingForm(request.POST, request.FILES)
 
     if request.method == 'POST':
-        print("post request received")
+
         form = SightingForm(request.POST, request.FILES)
-        print(f"{request.POST}")
+
         if form.is_valid():
-            print("form is valid")
+
             sighting = form.save(commit=False)
             sighting.expedition = expedition
             sighting.save()
@@ -51,7 +47,7 @@ def add_sighting(request: HttpRequest, slug: str) -> HttpResponse:
     else:
         form = SightingForm()
 
-    print(f"{form.errors}")
+
 
     context = {
         'expedition': expedition,
@@ -68,9 +64,9 @@ def edit_sighting(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
 
     if request.method == 'POST':
         form = SightingForm(request.POST, request.FILES, instance=sighting)
-        print(f"Form data: {request.POST}")
+
         if form.is_valid():
-            print("form is valid")
+
             sighting.save()
             return redirect('sighting_list', slug=slug)
 

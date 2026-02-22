@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.defaults import page_not_found
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,10 @@ urlpatterns = [
     path("analytics/", include("analytics_dashboard.urls")),
     path("expeditions/", include("expeditions.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
+]
+
+urlpatterns += [
+    path('404/', lambda request: page_not_found(request, None)),
 ]
 
 if settings.DEBUG:
