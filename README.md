@@ -104,7 +104,7 @@ Incase the custom 404 needs to be viewed with Debug=False do the following:
 ```bash
 pip install whitenoise
 ```
-Add it to MIDDLEWARE like so:
+Add it to MIDDLEWARE:
 ```bash
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,7 +112,7 @@ MIDDLEWARE = [
     ...
 ]
 ```
-Then add it to settings.py like so:
+Then add it to settings.py:
 ```bash
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
