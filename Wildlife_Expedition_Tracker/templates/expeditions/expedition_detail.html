@@ -25,6 +25,8 @@
         </div>
     </div>
     <div class="flex flex-row justify-center mt-8 gap-4">
+        <a href="{% url 'sighting_list' expedition.slug %}"
+        class="flex items-center justify-center border rounded-sm  h-10 w-34 bg-slate-300 hover:bg-slate-400">View sightings</a>
         <a href="{% url 'add_sighting' expedition.slug %}"
         class="flex items-center justify-center border rounded-sm  h-10 w-34 bg-slate-300 hover:bg-slate-400">Add sighting</a>
         <a href="{% url 'edit_expedition' expedition.slug %}"
