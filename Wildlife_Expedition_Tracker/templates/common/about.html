@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}About - Wildlife Expedition Tracker{% endblock %}
+
+{% block content %}
+<h1 class="flex text-3xl mt-10 justify-center">About the Wildlife Expedition Tracker</h1>
+<div class="flex items-start flex-col items-center gap-4 mt-10 w-3/4 mx-auto">
+    <p class="text-xl">This project was developed as part of the SoftUni Django Basics course.
+        The application serves as a comprehensive tool for managing wildlife data,
+        designed to demonstrate the core functionalities of the Django framework.
+    </p>
+    <p class="text-xl">
+        Key Features:
+    </p>
+    <ul class="text-xl list-disc list-inside">
+        <li>Animal Database: A centralized registry for different species and their unique characteristics.</li>
+        <li>Expedition Management: Planning and tracking organized field trips to specific locations.</li>
+        <li>Sighting Logs: A detailed record-keeping system for wildlife encounters, including GPS coordinates, timestamps, and photo uploads</li>
+    </ul>
+</div>
+{% endblock %}

@@ -15,7 +15,7 @@ def home(request: HttpRequest) -> HttpResponse:
     return render(request, "common/home.html")
 
 def about(request: HttpRequest) -> HttpResponse:
-    pass
+    return render(request, 'common/about.html')
 
 def media_gallery(request: HttpRequest) -> HttpResponse:
 

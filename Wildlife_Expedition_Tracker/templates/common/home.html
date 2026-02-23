@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load home_page_tags %}
 {% block title %}Dashboard - Wildlife Expedition Tracker{% endblock %}
 
 {% block content %}
@@ -10,5 +11,31 @@
         <a class="border p-8 rounded-sm w-46 bg-slate-300 text-center hover:bg-slate-400" href="{% url 'animals_list' %}">Animals</a>
         <a class="border p-8 rounded-sm w-46 bg-slate-300 text-center hover:bg-slate-400" href="{% url 'media_gallery' %}">Gallery</a>
         <a class="border p-8 rounded-sm w-46 bg-slate-300 text-center hover:bg-slate-400" href="{% url 'analytics_dashboard' %}">Analytics</a>
+    </div>
+    <div class="flex flex-col items-center justify-center">
+        <div class="w-200">
+            <div class="flex gap-4 justify-center border rounded-sm p-4 bg-amber-50 text-2xl">
+                <div class="flex flex-col gap-2 border-r pr-4">
+                    <p>🗺️ Total Expeditions: {% total_expeditions %}</p>
+                    <p>🐾 Total Sightings: {% total_sightings %}</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    {% recent_expedition as expedition %}
+                    <a class="underline hover:text-blue-600" href="{% url 'expedition_detail' expedition.slug %}">Recent Expedition: 📍 {{ expedition.title }}</a>
+                    {% recent_sighting as sighting %}
+                    <a class="underline hover:text-blue-600"
+                       href="{% url 'sighting_detail' expedition.slug sighting.pk %}"
+                    >Recent Sighting: 👁️ {{ sighting.animal }} {% if sighting.created_at|is_new %}<span class="text-red-400 font-bold">- NEW*</span>{% endif %}</a>
+                </div>
+            </div>
+            <div>
+                <div class="w-200 border border-t-0 rounded-sm p-4 bg-amber-50 mb-10">
+                    {% random_animal_fact as fact %}
+                    <p class="text-center text-2xl font-semibold mb-2">Did you know?</p>
+                    <p class="text-xl text-center text-gray-700 italic">The {{ fact.name }}'s most distinctive feature is its {{ fact.most_distinctive_feature }}.</p>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

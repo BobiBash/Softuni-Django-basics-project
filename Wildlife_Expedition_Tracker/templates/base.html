@@ -15,7 +15,7 @@
     <nav class="flex flex-row bg-amber-50 p-2">
         <a class="p-2" href="{% url 'home' %}">Home</a>
         <a class="p-2" href="https://github.com/BobiBash">Github</a>
-        <a class="p-2" href="#about">About</a>
+        <a class="p-2" href="{% url 'about' %}">About</a>
         <!-- Dropdown -->
         <div class="relative" x-data="{ open: false }" @click.outside="open = false">
             <a href="#" @click.prevent="open = !open" class="flex items-center p-2 cursor-pointer select-none">
@@ -29,8 +29,8 @@
             </ul>
         </div>
         <div class="absolute left-1/2 -translate-x-1/2">
-            <form method="GET" action="{% url 'search' %}" class="flex border rounded-sm items-center">
-                <input type="text" list="search-options" name="query" class="w-150 outline-none pl-2 bg-white" placeholder="Search..." value="{{ request.GET.query }}">
+            <form method="GET" action="{% url 'search' %}" class="flex border rounded-sm items-center bg-white">
+                <input type="text" list="search-options" name="query" class="w-150 outline-none pl-2 " placeholder="Search..." value="{{ request.GET.query }}">
                 <datalist id="search-options">
                     {% for animal in animals %}
                         <option value="{{ animal.name }}"></option>

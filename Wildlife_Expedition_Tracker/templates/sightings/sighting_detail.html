@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load sighting_tags %}
 {% block content %}
     <div class="mt-8">
         <div class="flex flex-col mx-auto my-auto h-auto w-1/2 border rounded-sm shadow-lg mb-8">
@@ -9,23 +9,26 @@
                 <div class="text-xl flex flex-col bg-white w-full">
                     <div class="p-2">
                         <p class="p-2 m-4 border-b text-lg">Animal: {{ sighting.animal }}</p>
-                        <p class="p-2 m-4 border-b text-lg">Observed at - date: {{ sighting.observed_at_date|date:'d-m-Y' }}</p>
+                        <p class="p-2 m-4 border-b text-lg">Observed at - date: {{ sighting.observed_at_date|format_date }}</p>
                         <p class="p-2 m-4 border-b text-lg">Observed at - time: {{ sighting.observed_at_time }}</p>
                         <p class="p-2 m-4 border-b text-lg">Count: {{ sighting.count }}</p>
-                        <p class="p-2 m-4 border-b text-lg">Latitude: {{ sighting.latitude }}</p>
-                        <p class="p-2 m-4 border-b text-lg">Longitude: {{ sighting.longitude }}</p>
+                        <p class="p-2 m-4 border-b text-lg">Latitude: {{ sighting.latitude|lat_lon_format }},
+                            Longitude: {{ sighting.longitude|lat_lon_format  }}
+                            <a class="ml-110 hover:text-blue-600" href="https://www.openstreetmap.org/?mlat={{ sighting.latitude }}&mlon={{ sighting.longitude }}&zoom=12">View on Map 🗺️</a></p>
                         <p class="p-2 m-4 border-b text-lg">Notes: {{ sighting.notes }}</p>
 
                         <p class="p-2 m-4 text-lg">Animal Image:
                             {% if sighting.animal_image %}
+                            <a href="{{ sighting.animal_image.url }}" target="_blank">
                                 <img src="{{ sighting.animal_image.url }}" alt="animal_image">
+                            </a>
                             {% endif %}
 
                 </div>
             </div>
         </div>
     </div>
-    <div class="flex flex-row justify-center mt-8 gap-4">
+    <div class="flex flex-row justify-center m-8 gap-4">
         <a href="{% url 'expedition_detail' slug=sighting.expedition.slug %}"
         class="flex items-center justify-center border rounded-sm  h-10 w-34 bg-slate-300 hover:bg-slate-400">Expedition info</a>
         <a href="{% url 'sighting_list' sighting.expedition.slug %}"
