@@ -1,143 +1,171 @@
 # Wildlife Expedition Tracker
 
-## Project Overview
-The **Wildlife Expedition Tracker** is a comprehensive Django-based web application designed for researchers and wildlife enthusiasts to plan expeditions and record animal sightings. It provides a robust platform for managing wildlife data, tracking expedition progress, and visualizing trends through an analytics dashboard.
+A Django-based web application for researchers and wildlife enthusiasts to plan expeditions and record animal sightings made for my PythonWeb course at Softuni.
 
 ---
 
-## Features
+## 🚀 How to Run
 
-### 🐾 Animal Database
-- View a detailed list of animals including their kingdom, group, and distinctive features.
-- Explore individual animal profiles with unique slugs.
+### Prerequisites
 
-### 🗺️ Expedition Management (Full CRUD)
-- **Create**: Plan new expeditions specifying target species, expected species, and location.
-- **Read**: List all active expeditions with details and filtered views.
-- **Update**: Modify expedition details as plans evolve.
-- **Delete**: Remove expeditions with a secure confirmation step featuring read-only fields.
+- **Python 3.10+**
+- **PostgreSQL** installed and running
+- **pip** and **virtualenv**
 
-### 🔭 Sighting Records (Full CRUD)
-- **Log Sightings**: Record specific encounters during expeditions, including date, time, count, coordinates, and notes.
-- **Image Uploads**: Attach photos of sighted animals to records.
-- **Edit/Delete**: Full control over sighting logs with validation for geographic coordinates and time formats.
+### Step 1: Clone the Repository
 
-### 📊 Analytics Dashboard
-- Dynamic visualization of data using **Matplotlib**.
-- Track the top 5 most sighted animals and top 5 expedition locations.
-- View monthly expedition trends via an interactive line chart.
-
-### 🔍 Search & Discovery
-- Site-wide search functionality integrated via custom context processors.
-- Dedicated image gallery to browse all wildlife sightings visually.
-
----
-
-## Technologies Used
-- **Backend**: Django (Python)
-- **Database**: PostgreSQL
-- **Frontend**: Tailwind CSS (via `django-tailwind-cli`)
-- **Data Visualization**: Matplotlib
-- **Environment Management**: `python-dotenv`
-- **Validation**: Custom Django validators for coordinates and time.
-
----
-
-## Database Architecture
-The project utilizes a relational PostgreSQL database with the following key models:
-- **Animal**: Stores species information.
-- **Expedition**:
-    - `ForeignKey` to **Animal** (Target Species).
-    - `ManyToMany` to **Animal** (Expected Species).
-- **Sighting**:
-    - `ForeignKey` to **Expedition**.
-    - `ForeignKey` to **Animal**.
-
----
-
-## Installation & Setup
-
-### 1. Clone the Repository
 ```bash
-git clone https://github.com/BobiBash/Softuni-Django-basics-project
-cd Wildlife_Expedition_Tracker
+git clone https://github.com/BobiBash/Softuni-Django-basics-project.git
+cd Softuni-Django-basics-project/Wildlife_Expedition_Tracker
 ```
 
-### 2. Create and Activate Virtual Environment
+### Step 2: Create and Activate Virtual Environment
+
 ```bash
-python -m venv venv
 # Windows
+python -m venv venv
 venv\Scripts\activate
-# Unix/macOS
+
+# macOS/Linux
+python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install Dependencies
+### Step 3: Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Database Configuration
-Ensure you have **PostgreSQL** installed and running. Create a database named `wildlife_expedition_tracker_db`.
+> **Note:** Tailwind CSS is handled by `django-tailwind-cli` and `pytailwindcss`. No Node.js needed!
 
-### 5. Environment Variables
-Create a `.env` file in the root directory (where `manage.py` is located) and provide your PostgreSQL credentials:
-```env
-DB_USER=your_postgres_username
-DB_PASSWORD=your_postgres_password
-```
+### Step 4: Configure PostgreSQL
 
-### 6. Apply Migrations
+1. Create a database named `testing_wildlife_tracker`:
+   ```sql
+   CREATE DATABASE testing_wildlife_tracker;
+   ```
+
+2. Update the `.env` file with your PostgreSQL credentials:
+   ```env
+   DB_USER=postgres
+   DB_PASSWORD=your_password
+   ```
+
+### Step 5: Apply Migrations
+
 ```bash
 python manage.py migrate
 ```
 
-### 7. Run the Application
+### Step 6: (Optional) Populate Sample Data
+
+```bash
+python populate_db.py
+```
+
+This adds 20 sample animals for testing.
+
+### Step 7: Run the Server
+
 ```bash
 python manage.py tailwind runserver
 ```
-The application will be accessible at `http://127.0.0.1:8000/`.
 
-### 8. Custom 404
-I've set up a /404 url to view the custom 404.
-Incase the custom 404 needs to be viewed with Debug=False do the following:
-```bash
-pip install whitenoise
+The application will be available at: **http://127.0.0.1:8000/**
+
+---
+
+## 📁 Project Structure
+
 ```
-Add it to MIDDLEWARE:
-```bash
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # add this
-    ...
-]
-```
-Then add it to settings.py:
-```bash
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-```
-Then run:
-```bash
-python manage.py collectstatic
+Wildlife_Expedition_Tracker/
+├── animals/              # Animal database management
+├── expeditions/          # Expedition planning & CRUD
+├── sightings/            # Animal sighting records
+├── analytics_dashboard/  # Data visualization (Matplotlib charts)
+├── common/               # Home, About, Search, Gallery
+├── templates/            # Base templates & 404 page
+├── static/               # CSS and Tailwind assets
+├── media/                # Uploaded images
+└── populate_db.py        # Sample data seeder
 ```
 
 ---
 
-## Project Structure
-- `animals/`: Manages the wildlife database and profiles.
-- `expeditions/`: Handles planning, location tracking, and expedition CRUD.
-- `sightings/`: Manages encounter logs, coordinate validation, and image uploads.
-- `analytics_dashboard/`: Logic for data aggregation and Matplotlib chart generation.
-- `common/`: Shared resources, home page, search functionality, and base templates.
-- `templates/`: Structured Django templates with inheritance and a custom 404 page.
+## 📊 Database Models
+
+| Model | Relationships |
+|-------|---------------|
+| **Animal** | — |
+| **Expedition** | ForeignKey → Animal (target_species), ManyToMany → Animal (expected_species) |
+| **Sighting** | ForeignKey → Expedition, ForeignKey → Animal |
 
 ---
 
-## Requirements Fulfillment
-- **Apps**: 5 distinct Django apps.
-- **Models**: 3 core models with Many-to-One and Many-to-Many relationships.
-- **Forms**: Multiple forms with custom widgets, help texts, and disabled/read-only states for deletion confirmation.
-- **Templates**: Over 10 templates using a base layout, partials, and custom context processors.
-- **Database**: PostgreSQL implementation.
-- **Validation**: Robust server-side validation for dates, times, and geographic data.
+## ✨ Features
+
+### Animal Management
+- Browse all animals with kingdom, group, and distinctive features
+- View detailed animal profiles
+- Add new animals with form validation
+
+### Expedition CRUD
+- Create, Read, Update, Delete expeditions
+- Specify target and expected species
+- Location tracking with custom validation
+
+### Sighting CRUD
+- Log animal encounters with date, time, count, and coordinates
+- Upload wildlife photos
+- Latitude/Longitude validation
+
+### Analytics Dashboard
+- Top 5 most sighted animals
+- Top 5 expedition locations
+- Monthly trend chart (Matplotlib)
+
+### Search & Navigation
+- Site-wide search (animals & expeditions)
+- Media gallery with all sighting images
+- Custom 404 error page - view at `/404/`
+
+---
+
+## 🛠️ Technologies
+
+| Technology | Purpose |
+|------------|---------|
+| Django 6.0.1 | Backend framework |
+| PostgreSQL | Database |
+| Tailwind CSS | Styling (via django-tailwind-cli) |
+| Matplotlib | Data visualization |
+| Pillow | Image handling |
+
+---
+
+## 🔧 Configuration
+
+### Environment Variables (.env)
+
+```env
+DB_USER=postgres              # Your PostgreSQL username
+DB_PASSWORD=your_password     # Your PostgreSQL password
+```
+
+### Database Settings
+
+Default connection uses `localhost:5432`. Update in `settings.py` if needed:
+
+```python
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "testing_wildlife_tracker",
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
+```

@@ -3,10 +3,7 @@ import datetime as dt
 
 import calendar as cal
 
-from charset_normalizer import md
 from django.db.models import Count, Avg
-from django.db.models.functions import TruncDate, TruncMonth
-from django.forms import model_to_dict
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 import matplotlib

@@ -1,6 +1,5 @@
 from django import forms
 
-from .validators import validate_time
 from .models import Sighting
 
 class SightingForm(forms.ModelForm):
@@ -12,7 +11,6 @@ class SightingForm(forms.ModelForm):
     observed_at_time = forms.TimeField(
         help_text='Observed at - time',
         input_formats=['%H:%M', '%I:%M %p', '%H:%M:%S'],
-        validators=[validate_time],
         error_messages={
             'invalid': 'Invalid time. Use HH:MM format',
             'required': 'Required field',

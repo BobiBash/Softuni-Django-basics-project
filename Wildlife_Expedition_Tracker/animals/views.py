@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AnimalForm
 from .models import Animal
 
@@ -13,7 +13,7 @@ def animals_list(request: HttpRequest) -> HttpResponse:
     return render(request, "animals/animals_list.html", context)
 
 def animal_detail(request: HttpRequest, slug: str) -> HttpResponse:
-    animal = Animal.objects.get(slug=slug)
+    animal = get_object_or_404(Animal, slug=slug)
 
     context = {
         'animal': animal

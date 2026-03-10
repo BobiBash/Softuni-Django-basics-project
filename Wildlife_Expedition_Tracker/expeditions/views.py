@@ -2,8 +2,6 @@ from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
-import asyncio
-
 from django.utils.text import slugify
 
 from .forms import ExpeditionForm, ExpeditionDeleteForm
@@ -55,7 +53,8 @@ def edit_expedition(request: HttpRequest, slug: str) -> HttpResponse:
         form = ExpeditionForm(request.POST, instance=expedition)
         if form.is_valid():
             expedition = form.save(commit=False)
-            expedition.slug = slugify(expedition.title)
+            base_slug = slugify(expedition.title)
+            expedition.slug = expedition._generate_unique_slug(base_slug)
             expedition.save()
             return redirect('expeditions_list')
 
