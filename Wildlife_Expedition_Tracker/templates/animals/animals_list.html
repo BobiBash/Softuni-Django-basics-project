@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="flex justify-center mt-6 mb-4">
+        <a class="border rounded-sm p-2 bg-slate-300 hover:bg-slate-400" href="{% url 'add_animal' %}">+ Add Animal</a>
+    </div>
     <div class="flex flex-col mx-auto my-auto mt-10 w-120 mb-4 items-start">
         {% for animal in animals %}
         <div class="flex border w-115 rounded-sm justify-center p-2 m-2 bg-white">

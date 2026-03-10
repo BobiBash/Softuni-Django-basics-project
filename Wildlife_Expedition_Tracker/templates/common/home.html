@@ -21,11 +21,19 @@
                 </div>
                 <div class="flex flex-col gap-2">
                     {% recent_expedition as expedition %}
-                    <a class="underline hover:text-blue-600" href="{% url 'expedition_detail' expedition.slug %}">Recent Expedition: 📍 {{ expedition.title }}</a>
+                    {% if expedition %}
+                        <a class="underline hover:text-blue-600" href="{% url 'expedition_detail' expedition.slug %}">Recent Expedition: 📍 {{ expedition.title }}</a>
+                    {% else %}
+                        <p>Recent Expedition: No expeditions yet</p>
+                    {% endif %}
                     {% recent_sighting as sighting %}
-                    <a class="underline hover:text-blue-600"
-                       href="{% url 'sighting_detail' expedition.slug sighting.pk %}"
-                    >Recent Sighting: 👁️ {{ sighting.animal }} {% if sighting.created_at|is_new %}<span class="text-red-400 font-bold">- NEW*</span>{% endif %}</a>
+                    {% if sighting %}
+                        <a class="underline hover:text-blue-600"
+                           href="{% url 'sighting_detail' sighting.expedition.slug sighting.pk %}"
+                        >Recent Sighting: 👁️ {{ sighting.animal }} {% if sighting.created_at|is_new %}<span class="text-red-400 font-bold">- NEW*</span>{% endif %}</a>
+                    {% else %}
+                        <p>Recent Sighting: No sightings yet</p>
+                    {% endif %}
                 </div>
             </div>
             <div>

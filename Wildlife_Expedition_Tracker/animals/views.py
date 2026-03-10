@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import AnimalForm
 from .models import Animal
 
 # Create your views here.
@@ -18,3 +20,22 @@ def animal_detail(request: HttpRequest, slug: str) -> HttpResponse:
     }
 
     return render(request, "animals/animal_detail.html", context)
+
+def add_animal(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        form = AnimalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Animal Added Successfully")
+            return redirect('animals_list')
+        else:
+            messages.error(request, "Please correct the error/s below.")
+    else:
+        form = AnimalForm()
+
+    context = {
+        "form": form,
+        "title": "Add Animal",
+    }
+
+    return render(request, "animals/add_animal.html", context)

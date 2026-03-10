@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'Wildlife_Expedition_Tracker.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "wildlife_expedition_tracker_db",
+        "NAME": "testing_wildlife_tracker",
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": "127.0.0.1",
