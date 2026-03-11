@@ -20,7 +20,6 @@ def about(request: HttpRequest) -> HttpResponse:
 def media_gallery(request: HttpRequest) -> HttpResponse:
 
     sighting_images = Sighting.objects.exclude(animal_image=None).exclude(animal_image='')
-    print(sighting_images)
 
     context = {
         'sighting_images': sighting_images

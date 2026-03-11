@@ -33,25 +33,29 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
 
     top_animals = top_animals.values('animal__name', 'animal_count')
     top_locations = top_locations.values('location', 'location_count')
-    print(top_locations)
 
     today = dt.date.today()
     first_day = today.replace(day=1)
     last_day = today.replace(day=cal.monthrange(today.year, today.month)[1])
 
+    if today.month == 1:
+        last_month_num = 12
+        last_month_year = today.year - 1
+    else:
+        last_month_num = today.month - 1
+        last_month_year = today.year
+
     data = Sighting.objects.filter(
-        observed_at_date__year=today.year,
-        observed_at_date__month=today.month - 1
+        observed_at_date__year=last_month_year,
+        observed_at_date__month=last_month_num
     ).values('observed_at_date').annotate(
         avg_animals=Avg('count')
     ).order_by('observed_at_date')
 
-    last_month = dt.datetime.now().month - 1
-    current_year = dt.datetime.now().year
-    num_days = cal.monthrange(current_year, last_month)[1]
+    num_days = cal.monthrange(last_month_year, last_month_num)[1]
+    current_year = last_month_year
 
-    print(num_days)
-    days = [dt.date(current_year, last_month, day) for day in range(1, num_days + 1)]
+    days = [dt.date(last_month_year, last_month_num, day) for day in range(1, num_days + 1)]
 
     data_dict = {d['observed_at_date']: d['avg_animals'] for d in data}
 
