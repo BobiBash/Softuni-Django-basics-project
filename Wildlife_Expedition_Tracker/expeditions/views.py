@@ -53,8 +53,9 @@ def edit_expedition(request: HttpRequest, slug: str) -> HttpResponse:
         form = ExpeditionForm(request.POST, instance=expedition)
         if form.is_valid():
             expedition = form.save(commit=False)
-            base_slug = slugify(expedition.title)
-            expedition.slug = expedition._generate_unique_slug(base_slug)
+            if 'title' in form.changed_data:
+                base_slug = slugify(expedition.title)
+                expedition.slug = expedition._generate_unique_slug(base_slug)
             expedition.save()
             return redirect('expeditions_list')
 
