@@ -60,8 +60,7 @@ def edit_sighting(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
         form = SightingForm(request.POST, request.FILES, instance=sighting)
 
         if form.is_valid():
-
-            sighting.save()
+            form.save()
             return redirect('sighting_list', slug=slug)
 
     form = SightingForm(instance=sighting)
