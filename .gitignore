@@ -1,4 +1,5 @@
 .env
 .idea
 project_requirements
+__pycache__/
 Wildlife_Expedition_Tracker/.django_tailwind_cli
