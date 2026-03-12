@@ -33,6 +33,7 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
 
     top_animals = top_animals.values('animal__name', 'animal_count')
     top_locations = top_locations.values('location', 'location_count')
+    print(top_locations)
 
     today = dt.date.today()
     first_day = today.replace(day=1)
