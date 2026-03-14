@@ -17,9 +17,9 @@ class SightingForm(forms.ModelForm):
         },
         widget=forms.TimeInput(attrs={
             'type': 'text',
+            'id': 'timepicker',
             'class': 'border rounded-sm p-2 w-full bg-white',
-            'placeholder': 'HH:MM (e.g., 14:30)',
-            'pattern': '[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?',
+            'placeholder': 'Click to a select a time',
         }),
     )
 

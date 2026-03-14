@@ -1,11 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'details_card.html' %}
 {% load sighting_tags %}
-{% block content %}
-    <div class="mt-8">
-        <div class="flex flex-col mx-auto my-auto h-auto w-1/2 border rounded-sm shadow-lg mb-8">
-            <div class="flex flex-col items-center p-8 bg-linear-to-r from-green-300 to-green-400 border-b w-full">
-                    <p class="text-3xl">Sighting Details For : Expedition - {{ sighting.expedition.title }}</p>
-                </div>
+
+{% block header %}
+    <h1 class="text-3xl">Sighting Details For : Expedition - {{ sighting.expedition.title }}</h1>
+{% endblock %}
+{% block fields %}
                 <div class="text-xl flex flex-col bg-white w-full">
                     <div class="p-2">
                         <p class="p-2 m-4 border-b text-lg">Animal: {{ sighting.animal }}</p>
@@ -14,7 +13,7 @@
                         <p class="p-2 m-4 border-b text-lg">Count: {{ sighting.count }}</p>
                         <p class="p-2 m-4 border-b text-lg">Latitude: {{ sighting.latitude|lat_lon_format }},
                             Longitude: {{ sighting.longitude|lat_lon_format  }}
-                            <a class="ml-110 hover:text-blue-600" href="https://www.openstreetmap.org/?mlat={{ sighting.latitude }}&mlon={{ sighting.longitude }}&zoom=12">View on Map 🗺️</a></p>
+                            <a class="pl-81 hover:text-blue-600" href="https://www.openstreetmap.org/?mlat={{ sighting.latitude }}&mlon={{ sighting.longitude }}&zoom=12">View on Map 🗺️</a></p>
                         <p class="p-2 m-4 border-b text-lg">Notes: {{ sighting.notes }}</p>
 
                         <p class="p-2 m-4 text-lg">Animal Image:
@@ -23,21 +22,17 @@
                                 <img src="{{ sighting.animal_image.url }}" alt="animal_image">
                             </a>
                             {% endif %}
-
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-row justify-center m-8 gap-4">
+{% endblock %}
+{% block buttons %}
+    <div class="flex flex-row justify-center mb-4 gap-4">
+        <a href="{% url 'edit_sighting' sighting.expedition.slug sighting.pk %}"
+        class="flex items-center justify-center border border-black rounded-sm  h-10 w-18 bg-blue-500 hover:bg-blue-600 text-white">Edit</a>
+        <a href="{% url 'delete_sighting' sighting.expedition.slug sighting.pk %}"
+        class="flex items-center justify-center border border-black rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600 text-white">Delete</a>
         <a href="{% url 'expedition_detail' slug=sighting.expedition.slug %}"
         class="flex items-center justify-center border rounded-sm  h-10 w-34 bg-slate-300 hover:bg-slate-400">Expedition info</a>
         <a href="{% url 'sighting_list' sighting.expedition.slug %}"
-        class="flex items-center justify-center border rounded-sm  h-10 w-34 bg-slate-300 hover:bg-slate-400">Sighting list</a>
-        <a href="{% url 'edit_sighting' sighting.expedition.slug sighting.pk %}"
-        class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
-        <a href="{% url 'delete_sighting' sighting.expedition.slug sighting.pk %}"
-        class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
+        class="flex items-center justify-center border rounded-sm  h-10 w-34 bg-slate-300 hover:bg-slate-400">Back to List</a>
     </div>
-
-
 {% endblock %}

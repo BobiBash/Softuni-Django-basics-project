@@ -18,9 +18,9 @@
 
             <div class="flex gap-2 items-center">
                 <a href="{% url 'edit_sighting' expedition.slug sighting.pk %}"
-                class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
+                class="flex items-center justify-center border border-black rounded-sm  h-10 w-18 bg-blue-500 hover:bg-blue-600 text-white">Edit</a>
                 <a href="{% url 'delete_sighting' expedition.slug sighting.pk %}"
-                class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
+                class="flex items-center justify-center border border-black rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600 text-white">Delete</a>
             </div>
         </div>
         {% empty %}

@@ -1,20 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'details_card.html' %}
 
-{% block content %}
-    <div class="mt-20">
-        <div class="flex flex-col mx-auto my-auto h-110 w-1/2 border rounded-sm shadow-lg">
-            <div class="flex flex-col items-center p-8 bg-linear-to-r from-green-300 to-green-400 border-b w-full">
-                <p class="text-3xl">Name: {{ animal.name }}</p>
-                <p class="mt-6 text-xl">Group: {{ animal.group }}</p>
-            </div>
-            <div class="text-xl flex flex-col bg-white h-110 w-full">
-                <div class="p-2">
-                    <p class="p-2 m-4 border-b text-lg">Kingdom: {{ animal.kingdom }}</p>
-                    <p class="p-2 m-4 border-b text-lg">Food: {{ animal.food }}</p>
-                    <p class="p-2 m-4 border-b text-lg">Distinctive Feature: {{ animal.most_distinctive_feature }}</p>
-                    <p class="p-2 m-4 text-lg">Weight: {{ animal.weight }}</p>
-                </div>
-            </div>
+{% block header %}
+    <h1 class="text-3xl">Name: {{ animal.name }}</h1>
+{% endblock %}
+{% block fields %}
+        <div class="text-xl flex flex-col bg-white w-full">
+                <p class="p-2 m-4 border-b text-lg">Group: {{ animal.group }}</p>
+                <p class="p-2 m-4 border-b text-lg">Kingdom: {{ animal.kingdom }}</p>
+                <p class="p-2 m-4 border-b text-lg">Food: {{ animal.food }}</p>
+                <p class="p-2 m-4 border-b text-lg">Distinctive Feature: {{ animal.most_distinctive_feature }}</p>
+                <p class="p-2 m-4 border-b text-lg">Weight: {{ animal.weight }}</p>
         </div>
+{% endblock %}
+{% block buttons %}
+    <div class="flex justify-center gap-4 mt-4 mb-8">
+        <a href="{% url 'edit_animal' animal.slug %}" class="border rounded-sm px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white">
+            Edit
+        </a>
+        <a href="{% url 'delete_animal' animal.slug %}" class="border rounded-sm px-6 py-2 bg-red-500 hover:bg-red-600 text-white">
+            Delete
+        </a>
+        <a href="{% url 'animals_list' %}" class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400">
+            Back to List
+        </a>
     </div>
 {% endblock %}

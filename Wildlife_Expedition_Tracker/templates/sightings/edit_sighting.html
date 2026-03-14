@@ -37,3 +37,14 @@
         </div>
     </form>
 {% endblock %}
+{% block scripts %}
+    <script>
+        config = {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+        }
+        flatpickr("#timepicker", config);
+    </script>
+{% endblock %}

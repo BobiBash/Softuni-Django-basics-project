@@ -41,6 +41,7 @@ def expedition_detail(request: HttpRequest, slug: str) -> HttpResponse:
 
 def expeditions_list(request: HttpRequest) -> HttpResponse:
     expeditions = Expedition.objects.all().order_by("title")
+    print(expeditions)
     context = {
         "expeditions": expeditions
     }

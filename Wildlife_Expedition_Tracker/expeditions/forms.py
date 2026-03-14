@@ -15,6 +15,8 @@ class ExpeditionForm(forms.ModelForm):
                   'expected_species',
                   'description',
                   'location',
+                  'start_date',
+                  'end_date',
                   ]
 
         help_texts = {
@@ -23,6 +25,8 @@ class ExpeditionForm(forms.ModelForm):
             'expected_species': 'Expected Species',
             'description': 'Description',
             'location': 'Location',
+            'start_date': 'Start Date',
+            'end_date': "End Date",
         }
 
 
@@ -47,6 +51,14 @@ class ExpeditionForm(forms.ModelForm):
             'location': forms.TextInput(attrs={
                 'class': 'border rounded-sm p-2 w-full bg-white',
                 'placeholder': 'e.g, Amazon Rainforest, Brazil'
+            }),
+            'start_date': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'border rounded-sm p-2 w-full bg-white',
+            }),
+            'end_date': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'border rounded-sm p-2 w-full bg-white',
             }),
         }
 

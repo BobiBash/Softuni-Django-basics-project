@@ -7,27 +7,29 @@
 </div>
 <div class="flex justify-center m-8">
     <div class="grid grid-cols-1 gap-2 p-1 w-3xl overflow-y-auto">
-        {% for expedition in expeditions %}
-        <div class="flex justify-between border rounded-sm p-2 bg-white">
-            <div>
-                <a href="{% url 'expedition_detail' expedition.slug %} " class="underline hover:text-blue-800">
-                    <p class="text-xl">{{ expedition.title }}</p>
-                </a>
-                <p>Created on: {{ expedition.created_at|date:"d-m-Y" }}</p>
-            </div>
+        {% if expeditions %}
+            {% for expedition in expeditions %}
+            <div class="flex justify-between border rounded-sm p-2 bg-white">
+                <div>
+                    <a href="{% url 'expedition_detail' expedition.slug %} " class="underline hover:text-blue-800">
+                        <p class="text-xl">{{ expedition.title }}</p>
+                    </a>
+                    <p>Created on: {{ expedition.created_at|date:"d-m-Y" }}</p>
+                </div>
 
-            <div class="flex gap-2 items-center">
-                <a href="{% url 'sighting_list' expedition.slug %}"
-                class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Sightings</a>
-                <a href="{% url 'edit_expedition' expedition.slug %}"
-                class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Edit</a>
-                <a href="{% url 'delete_expedition' expedition.slug %}"
-                class="flex items-center justify-center border rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600">Delete</a>
+                <div class="flex gap-2 items-center">
+                    <a href="{% url 'sighting_list' expedition.slug %}"
+                    class="flex items-center justify-center border rounded-sm  h-10 w-18 bg-slate-300 hover:bg-slate-400">Sightings</a>
+                    <a href="{% url 'edit_expedition' expedition.slug %}"
+                    class="flex items-center justify-center border border-black rounded-sm  h-10 w-18 bg-blue-500 hover:bg-blue-600 text-white">Edit</a>
+                    <a href="{% url 'delete_expedition' expedition.slug %}"
+                    class="flex items-center justify-center border border-black rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600 text-white">Delete</a>
+                </div>
             </div>
-        </div>
-        {% empty %}
+            {% endfor %}
+        {% else %}
             <h1 class="">No expeditions registered yet.</h1>
-        {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

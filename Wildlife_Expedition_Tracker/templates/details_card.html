@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="mt-20 w-200  h-fit flex mx-auto my-auto flex-col items-center">
+            <div class="border flex flex-col mx-auto p-7 bg-linear-to-r from-green-300 to-green-400 w-200 justify-center items-center shadow-lg">
+                {% block header %}
+                {% endblock %}
+            </div>
+            <div class="border border-t-0 flex flex-col w-200">
+                {% block fields %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="flex flex-row justify-center mt-8 gap-4">
+            {% block buttons %}
+            {% endblock %}
+        </div>
+{% endblock %}

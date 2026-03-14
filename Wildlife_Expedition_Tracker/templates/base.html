@@ -8,7 +8,9 @@
     <title>{% block title %}Wildlife Expedition Tracker{% endblock %}</title>
     {% tailwind_css %}
     <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body class="flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -32,12 +34,16 @@
             <form method="GET" action="{% url 'search' %}" class="flex border rounded-sm items-center bg-white">
                 <input type="text" list="search-options" name="query" class="w-150 outline-none pl-2 " placeholder="Search..." value="{{ request.GET.query }}">
                 <datalist id="search-options">
-                    {% for animal in animals %}
-                        <option value="{{ animal.name }}"></option>
-                    {% endfor %}
-                    {% for expedition in expeditions %}
-                        <option value="{{ expedition.title }}"></option>
-                    {% endfor %}
+                    {% if animals %}
+                        {% for animal in animals %}
+                            <option value="{{ animal.name }}"></option>
+                        {% endfor %}
+                    {% endif %}
+                    {% if expeditions %}
+                        {% for expedition in expeditions %}
+                            <option value="{{ expedition.title }}"></option>
+                        {% endfor %}
+                    {% endif %}
                 </datalist>
                 <button type="submit" class="p-2 bg-amber-200">Search</button>
             </form>
@@ -57,5 +63,8 @@
             <p>&copy; 2026 Wildlife Expedition Tracker</p>
         </div>
     </footer>
+{% block scripts %}
+{% endblock %}
+
 </body>
 </html>
