@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Softuni-Django-basics-project.iml" filepath="$PROJECT_DIR$/.idea/Softuni-Django-basics-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Wildlife_Expedition_Tracker.iml" filepath="$PROJECT_DIR$/.idea/Wildlife_Expedition_Tracker.iml" />
     </modules>
   </component>
 </project>

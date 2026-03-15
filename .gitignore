@@ -3,4 +3,4 @@
 project_requirements
 __pycache__/
 *.pyc
-Wildlife_Expedition_Tracker/.django_tailwind_cli
+.django_tailwind_cli

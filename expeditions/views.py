@@ -59,8 +59,9 @@ def edit_expedition(request: HttpRequest, slug: str) -> HttpResponse:
                 expedition.slug = expedition._generate_unique_slug(base_slug)
             expedition.save()
             return redirect('expeditions_list')
+    else:
+        form = ExpeditionForm(instance=expedition)
 
-    form = ExpeditionForm(instance=expedition)
     context = {
         "expedition": expedition,
         "form": form,

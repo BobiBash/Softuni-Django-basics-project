@@ -8,6 +8,15 @@ class ExpeditionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['target_species'].empty_label = 'Choose an animal'
 
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+        if not start_date < end_date:
+            raise forms.ValidationError("End date must be after start date.")
+        return cleaned_data
+
     class Meta:
         model = Expedition
         fields = ['title',
