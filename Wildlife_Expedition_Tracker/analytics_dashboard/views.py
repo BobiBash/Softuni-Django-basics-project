@@ -64,7 +64,7 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
     labels[-1] = last_day.strftime('%d %b')
     values = [data_dict.get(day, 0) for day in days]
 
-    fig, ax = plt.subplots(figsize=(10, 4))
+    fig, ax = plt.subplots(figsize=(10, 3))
     ax.tick_params(axis='x', labelsize=18)
     ax.tick_params(axis='y', labelsize=18)
     ax.plot(days, values, marker='None', linewidth=1, color='steelblue')

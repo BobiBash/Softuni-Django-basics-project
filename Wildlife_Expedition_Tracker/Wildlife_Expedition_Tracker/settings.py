@@ -16,6 +16,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import os
+
+if os.environ.get("RUN_MAIN") == "true":
+    print("\n⚠️ IMPORTANT: Run this project with:\n")
+    print("    python manage.py tailwind runserver\n")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
