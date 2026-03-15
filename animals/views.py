@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.text import slugify
+
 from .forms import AnimalForm, DeleteAnimalForm
 from .models import Animal
 
@@ -48,14 +50,10 @@ def edit_animal(request: HttpRequest, slug: str) -> HttpResponse:
         if form.is_valid():
             animal = form.save(commit=False)
             if "name" in form.changed_data:
-                from django.utils.text import slugify
-
-                animal.slug = slugify(animal.name)
+                base_slug = slugify(animal.name)
+                animal.slug = animal._generate_unique_slug(base_slug)
             animal.save()
-            messages.success(request, "Animal Updated Successfully")
-            return redirect("animal_detail", slug=animal.slug)
-        else:
-            messages.error(request, "Please correct the error/s below.")
+            return redirect("animals_list")
     else:
         form = AnimalForm(instance=animal)
 

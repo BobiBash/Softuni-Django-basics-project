@@ -2,12 +2,12 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
 
-
+from common.mixins import SlugMixin
 from .validators import validate_latitude, validate_longitude
 
 
 # Create your models here.
-class Sighting(models.Model):
+class Sighting(SlugMixin, models.Model):
     expedition = models.ForeignKey(
         "expeditions.Expedition",
         on_delete=models.CASCADE,

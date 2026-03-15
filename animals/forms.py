@@ -23,6 +23,33 @@ class AnimalForm(forms.ModelForm):
             "weight": "Weight",
         }
 
+        error_messages = {
+            'name': {
+                'required': 'Animal name is a required field.',
+                'max_length': 'Cannot exceed 100 characters.',
+            },
+            'kingdom': {
+                'required': 'Animal kingdom is a required field.',
+                'max_length': 'Cannot exceed 50 characters.',
+            },
+            'group': {
+                'required': 'Animal group is a required field.',
+                'max_length': 'Cannot exceed 50 characters.',
+            },
+            'food': {
+                'required': 'Animal food is a required field.',
+                'max_length': 'Cannot exceed 100 characters.',
+            },
+            'most_distinctive_feature': {
+                'required': 'Animal most distinctive feature is a required field.',
+                'max_length': 'Cannot exceed 150 characters.',
+            },
+            'weight': {
+                'required': 'Animal weight is a required field.',
+                'max_length': 'Cannot exceed 50 characters.',
+            },
+        }
+
         widgets = {
             "name": forms.TextInput(
                 attrs={

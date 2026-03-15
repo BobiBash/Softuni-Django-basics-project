@@ -1,34 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form class="flex flex-col items-center align-center" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="flex flex-col items-center">
-            {% for field in form %}
-            <div class="flex flex-col justify-center items-center">
-                <label class="text-left items-start justify-start relative mt-2">{{ field.label }}</label>
-                {% if field.name == 'expected_species' %}
-                    <div style="background-color: white;" class="p-2 w-60 max-h-40 overflow-y-auto border rounded">
-                        {{ field }}
-                    </div>
-                {% else %}
-                {% comment %}
-                {% if field.name == 'animal_image' %}
-                    {% if expedition.animal_image %}
-                        <img class="max-w-sm mb-8" src="{{ expedition.animal_image.url }}" alt="animal_image">
+        <h1 class="flex justify-center align-center text-2xl mb-6">Edit Expedition</h1>
+
+        <form class="flex flex-col items-center align-center" novalidate method="post" enctype="multipart/form-data">
+            <div class="flex flex-col">
+                {% csrf_token %}
+                {% for field in form %}
+                {{ field.help_text }}
+                <div class="flex flex-col mb-2">
+                    {% if field.name == 'expected_species' %}
+                        <div class="p-2 w-60 max-h-40 overflow-y-auto border rounded bg-white">
+                            {{ field }}
+                        </div>
+                    {% else %}
+                        <div class="w-60">
+                            {{ field }}
+                        </div>
                     {% endif %}
-                {% endif %}
-                {% endcomment %}
-
-
-                <div class="w-60">
-                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="max-w-60 text-red-500">{{ error }}</p>
+                    {% endfor %}
                 </div>
-                {% endif %}
+                {% endfor %}
+                <button class="border rounded-sm p-2 m-8 bg-slate-300 hover:bg-slate-400" type="submit">Edit Expedition</button>
             </div>
-            {% endfor %}
-
-            <button class="w-20 border rounded-sm p-2 m-8 bg-slate-300 hover:bg-slate-400" type="submit">Save</button>
-        </div>
-    </form>
+        </form>
 {% endblock %}

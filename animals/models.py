@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.text import slugify
 
+from common.mixins import SlugMixin
+
 
 # Create your models here.
-class Animal(models.Model):
+class Animal(SlugMixin, models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True, blank=True)
     kingdom = models.CharField(max_length=50)

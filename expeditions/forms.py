@@ -13,7 +13,7 @@ class ExpeditionForm(forms.ModelForm):
         cleaned_data = super().clean()
         start_date = cleaned_data.get('start_date')
         end_date = cleaned_data.get('end_date')
-        if not start_date < end_date:
+        if start_date and end_date and not start_date <= end_date:
             raise forms.ValidationError("End date must be after start date.")
         return cleaned_data
 
@@ -36,6 +36,36 @@ class ExpeditionForm(forms.ModelForm):
             'location': 'Location',
             'start_date': 'Start Date',
             'end_date': "End Date",
+        }
+
+        error_messages = {
+            'title': {
+                'required': 'Title is a required field.',
+                'max_length': 'Cannot exceed 150 characters.',
+            },
+            'target_species': {
+                'required': 'Please select a target species.',
+            },
+            'expected_species': {
+                'required': 'Please select a target species.',
+            },
+            'description': {
+                'required': 'Description is a required field.',
+                'max_length': 'Cannot exceed 500 characters.',
+            },
+            'location': {
+                'required': 'Location is a required field.',
+                'max_length': 'Cannot exceed 150 characters.',
+                'invalid': 'Please enter a valid location.',
+            },
+            'start_date': {
+                'required': 'Please select a start date.',
+                'invalid': 'Please enter a valid date.',
+            },
+            'end_date': {
+                'required': 'Please select an end date.',
+                'invalid': 'Please enter a valid date.',
+            }
         }
 
 
