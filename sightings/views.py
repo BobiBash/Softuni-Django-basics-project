@@ -63,7 +63,8 @@ def edit_sighting(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
             form.save()
             return redirect('sighting_list', slug=slug)
 
-    form = SightingForm(instance=sighting)
+    else:
+        form = SightingForm(instance=sighting)
 
     context = {
         'form': form,

@@ -292,9 +292,6 @@
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
   }
-  .ml-18 {
-    margin-left: calc(var(--spacing) * 18);
-  }
   .block {
     display: block;
   }
@@ -339,9 +336,6 @@
   }
   .w-18 {
     width: calc(var(--spacing) * 18);
-  }
-  .w-20 {
-    width: calc(var(--spacing) * 20);
   }
   .w-34 {
     width: calc(var(--spacing) * 34);

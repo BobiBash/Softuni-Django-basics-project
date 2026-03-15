@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from common.mixins import SlugMixin
-from .validators import validate_text
+from common.validators import validate_text
 
 
 # Create your models here.
