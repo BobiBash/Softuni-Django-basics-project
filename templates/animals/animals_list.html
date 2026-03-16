@@ -5,18 +5,36 @@
         <a class="mt-5 text-xl border rounded-sm bg-slate-300 hover:bg-slate-400 w-50 text-center p-2" href="{% url 'add_animal' %}">Add Animal</a>
     </div>
     <div class="flex flex-col items-center">
-            {% for animal in animals %}
-            <div class="flex border w-3xl rounded-sm justify-between items-center p-2 m-2 bg-white">
-                <a class="text-xl underline hover:text-blue-800" href="{% url 'animal_detail' animal.slug %}">{{ animal.name }}</a>
-                <div class="flex gap-2">
-                    <a href="{% url 'edit_animal' animal.slug %}" class="flex items-center justify-center border border-black rounded-sm  h-10 w-18 bg-blue-500 hover:bg-blue-600 text-white">
-                        Edit
-                    </a>
-                    <a href="{% url 'delete_animal' animal.slug %}" class="flex items-center justify-center border border-black rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600 text-white">
-                        Delete
-                    </a>
+        {% if page_obj %}
+                {% for animal in page_obj %}
+                <div class="flex border w-3xl rounded-sm justify-between items-center p-2 m-2 bg-white">
+                    <a class="text-xl underline hover:text-blue-800" href="{% url 'animal_detail' animal.slug %}">{{ animal.name }}</a>
+                    <div class="flex gap-2">
+                        <a href="{% url 'edit_animal' animal.slug %}" class="flex items-center justify-center border border-black rounded-sm  h-10 w-18 bg-blue-500 hover:bg-blue-600 text-white">
+                            Edit
+                        </a>
+                        <a href="{% url 'delete_animal' animal.slug %}" class="flex items-center justify-center border border-black rounded-sm h-10 w-18 bg-red-500 hover:bg-red-600 text-white">
+                            Delete
+                        </a>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+                <div class="flex flex-row gap-2 mt-4">
+                    {% if page_obj.has_previous %}
+                        <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page=1">First</a>
+                        <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    {% endif %}
+                    <div class="flex justify-center items-center text-2xl">
+                        <p class="flex justify-center">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+                    </div>
+                    {% if page_obj.has_next %}
+                        <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                    {% endif %}
+                </div>
+        {% else %}
+            <h1 class="">No animals registered yet.</h1>
+        {% endif %}
     </div>
+
 {% endblock %}

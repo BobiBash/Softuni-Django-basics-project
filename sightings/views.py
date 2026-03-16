@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -12,9 +13,13 @@ def sighting_list(request: HttpRequest, slug: str) -> HttpResponse:
     expedition = get_object_or_404(Expedition, slug=slug)
     sightings = Sighting.objects.filter(expedition=expedition).order_by('-observed_at_date')
 
+    pagination = Paginator(sightings, 10)
+    page_number = request.GET.get('page')
+    page_obj = pagination.get_page(page_number)
+
     context = {
         'expedition': expedition,
-        'sightings': sightings
+        'page_obj': page_obj,
     }
 
     return render(request, 'sightings/sighting_list.html', context)
@@ -42,6 +47,7 @@ def add_sighting(request: HttpRequest, slug: str) -> HttpResponse:
             return redirect('sighting_list', slug=slug)
     else:
         form = SightingForm()
+
 
     context = {
         'expedition': expedition,

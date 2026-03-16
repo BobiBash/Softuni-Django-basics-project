@@ -1,177 +1,145 @@
 import os
-
 import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Wildlife_Expedition_Tracker.settings')
+import random
+from datetime import datetime, timedelta, time
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Wildlife_Expedition_Tracker.settings")
 django.setup()
 
-
 from animals.models import Animal
+from expeditions.models import Expedition
+from sightings.models import Sighting
 
 
-animals_data = [
-    {
-        "name": "African Elephant",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Grasses, leaves, bark, fruits",
-        "most_distinctive_feature": "Large ears and long trunk",
-        "weight": "4,000-7,000 kg"
-    },
-    {
-        "name": "Bengal Tiger",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Deer, wild boar, buffalo",
-        "most_distinctive_feature": "Orange coat with black stripes",
-        "weight": "180-260 kg"
-    },
-    {
-        "name": "Blue Whale",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Krill, small fish",
-        "most_distinctive_feature": "Largest animal on Earth",
-        "weight": "100,000-200,000 kg"
-    },
-    {
-        "name": "Bald Eagle",
-        "kingdom": "Animalia",
-        "group": "Bird",
-        "food": "Fish, small mammals, carrion",
-        "most_distinctive_feature": "White head and yellow beak",
-        "weight": "3-6.3 kg"
-    },
-    {
-        "name": "Emperor Penguin",
-        "kingdom": "Animalia",
-        "group": "Bird",
-        "food": "Fish, squid, krill",
-        "most_distinctive_feature": "Largest penguin species",
-        "weight": "22-45 kg"
-    },
-    {
-        "name": "Giant Panda",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Bamboo shoots and leaves",
-        "most_distinctive_feature": "Black and white fur pattern",
-        "weight": "70-120 kg"
-    },
-    {
-        "name": "Saltwater Crocodile",
-        "kingdom": "Animalia",
-        "group": "Reptile",
-        "food": "Fish, birds, mammals",
-        "most_distinctive_feature": "Largest living reptile",
-        "weight": "400-1,000 kg"
-    },
-    {
-        "name": "Great White Shark",
-        "kingdom": "Animalia",
-        "group": "Fish",
-        "food": "Seals, sea lions, fish",
-        "most_distinctive_feature": "Powerful jaws with rows of teeth",
-        "weight": "680-1,100 kg"
-    },
-    {
-        "name": "Mountain Gorilla",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Leaves, shoots, stems, bamboo",
-        "most_distinctive_feature": "Thick black fur and large size",
-        "weight": "140-200 kg"
-    },
-    {
-        "name": "Polar Bear",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Seals, fish, walrus",
-        "most_distinctive_feature": "White fur and adapted to cold",
-        "weight": "350-700 kg"
-    },
-    {
-        "name": "Red Fox",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Small rodents, rabbits, birds",
-        "most_distinctive_feature": "Reddish-orange fur and bushy tail",
-        "weight": "4-8 kg"
-    },
-    {
-        "name": "Komodo Dragon",
-        "kingdom": "Animalia",
-        "group": "Reptile",
-        "food": "Deer, pigs, smaller dragons",
-        "most_distinctive_feature": "Largest living lizard",
-        "weight": "70-90 kg"
-    },
-    {
-        "name": "African Lion",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Zebras, wildebeest, buffalo",
-        "most_distinctive_feature": "Male's distinctive mane",
-        "weight": "120-190 kg"
-    },
-    {
-        "name": "Snow Leopard",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Mountain goats, sheep, marmots",
-        "most_distinctive_feature": "Thick spotted fur and long tail",
-        "weight": "25-55 kg"
-    },
-    {
-        "name": "Humpback Whale",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Krill, small fish",
-        "most_distinctive_feature": "Long pectoral fins and singing",
-        "weight": "25,000-30,000 kg"
-    },
-    {
-        "name": "Grey Wolf",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Deer, elk, moose, smaller mammals",
-        "most_distinctive_feature": "Pack behavior and howling",
-        "weight": "30-80 kg"
-    },
-    {
-        "name": "Cheetah",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Gazelles, impalas, small antelopes",
-        "most_distinctive_feature": "Fastest land animal",
-        "weight": "40-65 kg"
-    },
-    {
-        "name": "Orangutan",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Fruits, leaves, insects",
-        "most_distinctive_feature": "Long arms and reddish-brown hair",
-        "weight": "30-90 kg"
-    },
-    {
-        "name": "Green Sea Turtle",
-        "kingdom": "Animalia",
-        "group": "Reptile",
-        "food": "Seagrass, algae, jellyfish",
-        "most_distinctive_feature": "Heart-shaped shell",
-        "weight": "150-200 kg"
-    },
-    {
-        "name": "Grizzly Bear",
-        "kingdom": "Animalia",
-        "group": "Mammal",
-        "food": "Fish, berries, roots, small mammals",
-        "most_distinctive_feature": "Shoulder hump and large size",
-        "weight": "180-360 kg"
-    }
-]
+def create_animals():
+    animals = []
+    animal_names = [
+        "African Elephant",
+        "Lion",
+        "Giraffe",
+        "Zebra",
+        "Cheetah",
+        "Hippopotamus",
+        "Rhinoceros",
+        "Leopard",
+        "African Buffalo",
+        "Wildebeest",
+        "Spotted Hyena",
+        "African Wild Dog",
+        "Impala",
+        "Gazelle",
+        "Baboon",
+        "Crocodile",
+        "Flamingo",
+        "Ostrich",
+        "Meerkat",
+        "Warthog",
+        "Serval",
+    ]
 
-for animal in animals_data:
-    Animal.objects.create(**animal)
+    for i in range(21):
+        name = animal_names[i % len(animal_names)]
+        animal, created = Animal.objects.get_or_create(
+            name=f"{name} {i + 1}",
+            defaults={
+                "kingdom": "Animalia",
+                "group": "Mammal",
+                "food": "Herbivore",
+                "most_distinctive_feature": "Test feature",
+                "weight": "100-200 kg",
+            },
+        )
+        animals.append(animal)
+        print(f"Created animal: {animal.name}")
 
-print(f"Created {len(animals_data)} animals")
+    return animals
+
+
+def create_expeditions(animals):
+    expeditions = []
+    locations = [
+        "Serengeti National Park, Tanzania",
+        "Kruger National Park, South Africa",
+        "Maasai Mara, Kenya",
+        "Okavango Delta, Botswana",
+        "Bwindi Impenetrable Forest, Uganda",
+        "Namib Desert, Namibia",
+        "Lake Nakuru, Kenya",
+        "Hwange National Park, Zimbabwe",
+        "Zambezi River, Zambia",
+        "Nyungwe Forest, Rwanda",
+        "iSimangaliso Wetland Park, South Africa",
+        "Amboseli National Park, Kenya",
+        "Etosha National Park, Namibia",
+        "Lewa Wildlife Conservancy, Kenya",
+        "Kgalagadi Transfrontier Park, Botswana",
+        "Ngorongoro Crater, Tanzania",
+        "Virunga National Park, DRC",
+        "South Luangwa National Park, Zambia",
+        "Selous Game Reserve, Tanzania",
+        "Moremi Game Reserve, Botswana",
+        "Kibale Forest, Uganda",
+    ]
+
+    for i in range(21):
+        expedition, created = Expedition.objects.get_or_create(
+            title=f"Expedition {i + 1}",
+            defaults={
+                "target_species": animals[i % len(animals)],
+                "description": f"Description for expedition {i + 1}",
+                "location": locations[i % len(locations)],
+                "start_date": datetime(2025, 1, 1) + timedelta(days=i * 30),
+                "end_date": datetime(2025, 1, 10) + timedelta(days=i * 30),
+            },
+        )
+        expeditions.append(expedition)
+        print(f"Created expedition: {expedition.title}")
+
+    return expeditions
+
+
+def create_sightings(expeditions, animals):
+    sightings = []
+
+    for i in range(21):
+        sighting = Sighting.objects.create(
+            expedition=expeditions[i % len(expeditions)],
+            animal=animals[i % len(animals)],
+            observed_at_date=expeditions[i % len(expeditions)].start_date
+            + timedelta(days=random.randint(0, 5)),
+            observed_at_time=time(
+                hour=random.randint(6, 18), minute=random.randint(0, 59)
+            ),
+            count=random.randint(1, 10),
+            latitude=-1.2921 + random.uniform(-0.5, 0.5),
+            longitude=36.8219 + random.uniform(-0.5, 0.5),
+            notes=f"Sighting notes {i + 1}",
+        )
+        sightings.append(sighting)
+        print(
+            f"Created sighting: {sighting.animal.name} on {sighting.observed_at_date}"
+        )
+
+    return sightings
+
+
+def main():
+    print("Starting database population...")
+
+    print("\n=== Creating Animals ===")
+    animals = create_animals()
+
+    print("\n=== Creating Expeditions ===")
+    expeditions = create_expeditions(animals)
+
+    print("\n=== Creating Sightings ===")
+    sightings = create_sightings(expeditions, animals)
+
+    print(f"\n=== Population Complete ===")
+    print(f"Created {len(animals)} animals")
+    print(f"Created {len(expeditions)} expeditions")
+    print(f"Created {len(sightings)} sightings")
+
+
+if __name__ == "__main__":
+    main()

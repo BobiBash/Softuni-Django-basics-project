@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
@@ -10,7 +11,12 @@ from .models import Animal
 # Create your views here.
 def animals_list(request: HttpRequest) -> HttpResponse:
     animals = Animal.objects.all()
-    context = {"animals": animals}
+
+    paginator = Paginator(animals, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {"page_obj": page_obj,}
     return render(request, "animals/animals_list.html", context)
 
 

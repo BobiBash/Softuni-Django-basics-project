@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -41,9 +42,13 @@ def expedition_detail(request: HttpRequest, slug: str) -> HttpResponse:
 
 def expeditions_list(request: HttpRequest) -> HttpResponse:
     expeditions = Expedition.objects.all().order_by("title")
-    print(expeditions)
+
+    paginator = Paginator(expeditions, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        "expeditions": expeditions
+        'page_obj': page_obj,
     }
     return render(request, "expeditions/expeditions_list.html", context)
 

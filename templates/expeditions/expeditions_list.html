@@ -7,12 +7,12 @@
 </div>
 <div class="flex justify-center m-8">
     <div class="grid grid-cols-1 gap-2 p-1 w-3xl overflow-y-auto">
-        {% if expeditions %}
-            {% for expedition in expeditions %}
+        {% if page_obj %}
+            {% for expedition in page_obj %}
             <div class="flex justify-between border rounded-sm p-2 bg-white">
                 <div>
                     <a href="{% url 'expedition_detail' expedition.slug %} " class="underline hover:text-blue-800">
-                        <p class="text-xl">{{ expedition.title }}</p>
+                        <p id='expedition_title'class="text-xl">{{ expedition.title }}</p>
                     </a>
                     <p>Created on: {{ expedition.created_at|date:"d-m-Y" }}</p>
                 </div>
@@ -27,9 +27,23 @@
                 </div>
             </div>
             {% endfor %}
+            <div class="flex flex-row items-center justify-center gap-2 mt-4">
+                {% if page_obj.has_previous %}
+                    <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page=1">First</a>
+                    <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <div class="flex justify-center items-center text-2xl">
+                    <p class="flex justify-center">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+                </div>
+                {% if page_obj.has_next %}
+                    <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="border rounded-sm px-6 py-2 bg-slate-300 hover:bg-slate-400" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+             </div>
         {% else %}
             <h1 class="">No expeditions registered yet.</h1>
         {% endif %}
     </div>
 </div>
+
 {% endblock %}
