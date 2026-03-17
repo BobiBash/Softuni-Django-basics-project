@@ -93,14 +93,14 @@ class ExpeditionForm(forms.ModelForm):
                 'placeholder': 'e.g, Amazon Rainforest, Brazil'
             }),
             'start_date': forms.DateInput(attrs={
-                'format': '%d/%m/%Y',
-                'type': 'date',
                 'class': 'border rounded-sm p-2 w-full bg-white',
+                'id': 'datepicker',
+                'placeholder': 'Select a starting date',
             }),
             'end_date': forms.DateInput(attrs={
-                'format': '%d/%m/%Y',
-                'type': 'date',
                 'class': 'border rounded-sm p-2 w-full bg-white',
+                'id': 'datepicker',
+                'placeholder': 'Select an ending date',
             }),
         }
 

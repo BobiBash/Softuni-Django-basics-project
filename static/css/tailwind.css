@@ -21,6 +21,7 @@
     --color-blue-800: oklch(42.4% 0.199 265.638);
     --color-slate-300: oklch(86.9% 0.022 252.894);
     --color-slate-400: oklch(70.4% 0.04 256.788);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
     --color-gray-600: oklch(44.6% 0.03 256.802);
     --color-gray-700: oklch(37.3% 0.034 259.733);
@@ -208,6 +209,9 @@
   }
 }
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .absolute {
     position: absolute;
   }
@@ -223,8 +227,14 @@
   .end {
     inset-inline-end: var(--spacing);
   }
+  .top-1\/2 {
+    top: calc(1 / 2 * 100%);
+  }
   .top-full {
     top: 100%;
+  }
+  .right-2 {
+    right: calc(var(--spacing) * 2);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
@@ -388,6 +398,9 @@
   .max-w-60 {
     max-width: calc(var(--spacing) * 60);
   }
+  .max-w-65 {
+    max-width: calc(var(--spacing) * 65);
+  }
   .max-w-sm {
     max-width: var(--container-sm);
   }
@@ -399,6 +412,10 @@
   }
   .-translate-x-1\/2 {
     --tw-translate-x: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-1\/2 {
+    --tw-translate-y: calc(calc(1 / 2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .cursor-pointer {
@@ -442,9 +459,6 @@
   }
   .justify-start {
     justify-content: flex-start;
-  }
-  .gap-1 {
-    gap: calc(var(--spacing) * 1);
   }
   .gap-1\.5 {
     gap: calc(var(--spacing) * 1.5);
@@ -643,6 +657,9 @@
   }
   .whitespace-nowrap {
     white-space: nowrap;
+  }
+  .text-gray-400 {
+    color: var(--color-gray-400);
   }
   .text-gray-500 {
     color: var(--color-gray-500);
