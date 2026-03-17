@@ -8,7 +8,7 @@ A Django-based web application for researchers and wildlife enthusiasts to plan 
 
 ### Prerequisites
 
-- **Python 3.10+**
+- **Python 3.13+**
 - **PostgreSQL** installed and running
 - **pip** and **virtualenv**
 
