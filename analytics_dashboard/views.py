@@ -65,11 +65,10 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
     values = [data_dict.get(day, 0) for day in days]
 
     fig, ax = plt.subplots(figsize=(10, 3))
-    ax.tick_params(axis='x', labelsize=18)
-    ax.tick_params(axis='y', labelsize=18)
+    ax.tick_params(axis='x', labelsize=14)
+    ax.tick_params(axis='y', labelsize=14)
     ax.plot(days, values, marker='None', linewidth=1, color='steelblue')
     plt.title("Average monthly expeditions (last month)", fontsize=18)
-    ax.set_yticks(range(0, int(max(values)) + 2, 1))
     ax.margins(x=0.02)
     interval = 4
     tick_days = [days[0]] + days[interval::interval] + [days[-1]]
