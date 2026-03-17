@@ -2,6 +2,7 @@ import base64
 import datetime as dt
 
 import calendar as cal
+import json
 
 from django.db.models import Count, Avg
 from django.http import HttpRequest, HttpResponse
@@ -33,11 +34,8 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
 
     top_animals = top_animals.values('animal__name', 'animal_count')
     top_locations = top_locations.values('location', 'location_count')
-    print(top_locations)
 
     today = dt.date.today()
-    first_day = today.replace(day=1)
-    last_day = today.replace(day=cal.monthrange(today.year, today.month)[1])
 
     if today.month == 1:
         last_month_num = 12
@@ -57,36 +55,19 @@ def analytics_dashboard(request: HttpRequest) -> HttpResponse:
 
     days = [dt.date(last_month_year, last_month_num, day) for day in range(1, num_days + 1)]
 
-    data_dict = {d['observed_at_date']: d['avg_animals'] for d in data}
+    data_dict = {d['observed_at_date']: float(d['avg_animals']) for d in data}
+    print(data_dict)
 
-    labels = [''] * len(days)
-    labels[0] = first_day.strftime('%d %b')
-    labels[-1] = last_day.strftime('%d %b')
     values = [data_dict.get(day, 0) for day in days]
+    labels = [d.strftime('%d %b') for d in days]
 
-    fig, ax = plt.subplots(figsize=(10, 3))
-    ax.tick_params(axis='x', labelsize=14)
-    ax.tick_params(axis='y', labelsize=14)
-    ax.plot(days, values, marker='None', linewidth=1, color='steelblue')
-    plt.title("Average monthly expeditions (last month)", fontsize=18)
-    ax.margins(x=0.02)
-    interval = 4
-    tick_days = [days[0]] + days[interval::interval] + [days[-1]]
-    ax.set_xticks(tick_days)
-    ax.xaxis.set_major_formatter(DateFormatter('%d %b'))
-    plt.tight_layout()
 
-    buffer = BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
-    plt.close(fig)
 
     context = {'top_animals': top_animals,
                'top_locations': top_locations,
-               'chart': image_base64}
-
-
+               'chart_labels': json.dumps(labels),
+               'chart_values': json.dumps(values),
+               'chart_month': cal.month_name[last_month_num]}
 
 
     return render(request, 'analytics/analytics_dashboard.html', context)

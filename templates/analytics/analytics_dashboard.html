@@ -2,32 +2,71 @@
 
 {% block content %}
 <div class="flex h-150">
-    <div class="flex items-center justify-center flex-wrap gap-6 mx-auto my-auto mt-10 p-4 w-full max-w-5xl border rounded-sm bg-white">
-        <div class="flex flex-col mx-4">
-            <div class="list-disc list-inside space-y-2 w-40 items-baseline">
-                <p class="text-2xl font-extrabold">Top animals</p>
-                {% for animal in top_animals %}
-                        {% if forloop.counter == 1 %}
-                        <p class="text-xl font-semibold w-66">{{ forloop.counter }}. {{ animal.animal__name }} - {{ animal.animal_count }}</p>
-                        {% else %}
-                        <p class="pl-0.5 text-base w-66">{{ forloop.counter }}. {{ animal.animal__name }} - {{ animal.animal_count }}</p>
-                        {% endif %}
-                {% endfor %}
-            </div>
+    <div class="flex flex-col items-center justify-center flex-wrap gap-6 mx-auto my-auto m-10 mt-5 p-4 w-full max-w-5xl border rounded-sm bg-white">
+        <div class="flex flex-row mx-4">
+
+                <div class="list-disc list-inside space-y-2 w-40 items-baseline">
+                    <p class="text-2xl font-extrabold">Top animals</p>
+                    {% for animal in top_animals %}
+                            {% if forloop.counter == 1 %}
+                            <p class="text-xl font-semibold w-66">{{ forloop.counter }}. {{ animal.animal__name }} - {{ animal.animal_count }}</p>
+                            {% else %}
+                            <p class="pl-0.5 text-base w-66">{{ forloop.counter }}. {{ animal.animal__name }} - {{ animal.animal_count }}</p>
+                            {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="flex flex-col mx-4">
+                    <div class="space-y-2 items-baseline w-40">
+                        <p class="text-2xl font-bold">Top Locations</p>
+                        {% for location in top_locations %}
+                                {% if forloop.counter == 1 %}
+                                <p class="text-xl font-semibold w-36">{{ forloop.counter }}. {{ location.location }} - {{ location.location_count }}</p>
+                                {% else %}
+                                <p class="pl-0.5 text-base w-36">{{ forloop.counter }}. {{ location.location }} - {{ location.location_count }}</p>
+                                {% endif %}
+                        {% endfor %}
+                    </div>
         </div>
-        <div class="flex flex-col mx-4">
-            <div class="space-y-2 items-baseline w-40">
-                <p class="text-2xl font-bold">Top Locations</p>
-                {% for location in top_locations %}
-                        {% if forloop.counter == 1 %}
-                        <p class="text-xl font-semibold w-36">{{ forloop.counter }}. {{ location.location }} - {{ location.location_count }}</p>
-                        {% else %}
-                        <p class="pl-0.5 text-base w-36">{{ forloop.counter }}. {{ location.location }} - {{ location.location_count }}</p>
-                        {% endif %}
-                {% endfor %}
             </div>
-        </div>
-        <img src="data:image/png;base64,{{ chart }}" class="w-full max-w-3xl h-auto" alt="chart"/>
+            <canvas class="h-80" id="sightingsChart"></canvas>
+
     </div>
 </div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+
+    new Chart(document.getElementById('sightingsChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: {{ chart_labels|safe }},
+            datasets: [{
+                label: 'Average animals sighted',
+                data: {{ chart_values|safe }},
+                borderColor: 'steelblue',
+                borderWidth: 1,
+                pointRadius: 0,
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Animals sighted for {{ chart_month }}',
+                }
+            },
+            scales: {
+                x: {
+                  ticks: {
+                    maxTicksLimit: 10,
+                  }
+                }
+              }
+        }
+    });
+</script>
 {% endblock %}

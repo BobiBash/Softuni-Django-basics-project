@@ -1,4 +1,23 @@
 {
+  "name": "wildlife_expedition_tracker",
+  "version": "1.0.0",
+  "description": "A Django-based web application for researchers and wildlife enthusiasts to plan expeditions and record animal sightings made for my PythonWeb course at Softuni.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BobiBash/Softuni-Django-basics-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BobiBash/Softuni-Django-basics-project/issues"
+  },
+  "homepage": "https://github.com/BobiBash/Softuni-Django-basics-project#readme",
   "devDependencies": {
     "tailwindcss": "^4.2.1"
   }
