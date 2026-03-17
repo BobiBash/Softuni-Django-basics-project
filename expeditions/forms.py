@@ -14,7 +14,8 @@ class ExpeditionForm(forms.ModelForm):
         start_date = cleaned_data.get('start_date')
         end_date = cleaned_data.get('end_date')
         if start_date and end_date and start_date > end_date:
-            raise forms.ValidationError("End date must be after start date.")
+            self.add_error('start_date', 'Start date must be before end date.')
+            self.add_error('end_date', 'End date must be after start date.')
         return cleaned_data
 
     class Meta:
@@ -92,10 +93,12 @@ class ExpeditionForm(forms.ModelForm):
                 'placeholder': 'e.g, Amazon Rainforest, Brazil'
             }),
             'start_date': forms.DateInput(attrs={
+                'format': '%d/%m/%Y',
                 'type': 'date',
                 'class': 'border rounded-sm p-2 w-full bg-white',
             }),
             'end_date': forms.DateInput(attrs={
+                'format': '%d/%m/%Y',
                 'type': 'date',
                 'class': 'border rounded-sm p-2 w-full bg-white',
             }),
